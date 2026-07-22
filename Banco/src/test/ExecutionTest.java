@@ -1,14 +1,14 @@
 package test;
 
 import domain.Cliente;
-import test.Agencia;
+
 import java.util.Scanner;
 
 public class ExecutionTest {
 
 
     public static void main(String[] args) {
-        Agencia agencia = new Agencia();
+        App agencia = new App();
         Cliente cliente = new Cliente();
         Scanner input = new Scanner(System.in);
 
