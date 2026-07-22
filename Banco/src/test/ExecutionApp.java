@@ -4,7 +4,7 @@ import domain.Cliente;
 
 import java.util.Scanner;
 
-public class ExecutionTest {
+public class ExecutionApp {
 
 
     public static void main(String[] args) {

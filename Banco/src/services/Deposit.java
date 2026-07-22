@@ -16,22 +16,22 @@ public class Deposit {
             System.out.println("BRADESCO - Saldo bancário disponpivel: " + bradesco.getSaldoBancario());
             System.out.println("Digite o valor a ser depositado: (0 para sair)");
             float  valor = sc.nextFloat();
-            sc.nextLine();
-            soma += valor;
-            bradesco.setSaldoBancario(soma);
+            if (bradesco.getSaldoBancario() >= valor) {
+                sc.nextLine();
+                soma += valor;
+                bradesco.setSaldoBancario(soma);
+                float novoSaldo = bradesco.getSaldoBancario() + soma;
+                bradesco.setSaldoBancario(novoSaldo);
 
-            float novoSaldo = bradesco.getSaldoBancario() + soma;
-            bradesco.setSaldoBancario(novoSaldo);
+                System.out.println("Deposito efetuado com sucesso! O valor de R$ " + valor + " reais Foi adicionado ao seu saldo bancário no aplicativo.");
 
-            System.out.println("Deposito efetuado com sucesso! O valor " + valor + "Foi adicionado ao seu saldo bancário.");
+            } else {
+                System.out.println("Saldo insuficiente.");
+            }
             return;
         } catch (Exception e) {
             System.out.println("Um Erro inesperado aconteceu, tente novamente.");
         }
-
-
-
-
     }
 
 }

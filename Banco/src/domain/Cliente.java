@@ -4,8 +4,7 @@ public class Cliente {
     private String email;
     private int senha;
     private float saldo = 10000;
-    private float cofrinhoPc;
-    private float cofrinhoCasa;
+
 
     public void setEmail(String email) {
         this.email = email;
@@ -35,18 +34,5 @@ public class Cliente {
         return this.saldo;
     }
 
-    // 💡 2. Mantendo tudo como float no Setter e Getter:
-    public void setCofrinhoPc(float cofrinhoPc) {
-        this.cofrinhoPc = cofrinhoPc;
-    }
 
-    public float getCofrinhoPc() {
-        return this.cofrinhoPc;
-    }
-    public void setCofrinhoCasa(float cofrinhoCasa) {
-        this.cofrinhoCasa = cofrinhoCasa;
-    }
-    public float getCofrinhoCasa() {
-        return this.cofrinhoCasa;
-    }
 }

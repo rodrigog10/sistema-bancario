@@ -29,7 +29,7 @@ public class App {
                         System.out.println("5 - Solicitar Empréstimo");
                         System.out.println("6 - Sair do Sistema\n ");
                         System.out.println("============================");
-
+        
                         System.out.println("Selecione a opção desejada: ");
                         int opcao = input.nextInt();
                         input.nextLine();

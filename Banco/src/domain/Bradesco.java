@@ -3,8 +3,10 @@ package domain;
 import services.Deposit;
 
 public class Bradesco {
-    Deposit deposit = new Deposit();
+
     private float saldoBancario;
+    private float cofrinhoPc;
+    private float cofrinhoCasa;
 
 
         public void setSaldoBancario(float saldoBancario) {
@@ -14,4 +16,20 @@ public class Bradesco {
             return saldoBancario;
         }
 
+    public void setCofrinhoPc(float cofrinhoPc) {
+        this.cofrinhoPc = cofrinhoPc;
+    }
+
+    public float getCofrinhoPc() {
+        return this.cofrinhoPc;
+    }
+    public void setCofrinhoCasa(float cofrinhoCasa) {
+        this.cofrinhoCasa = cofrinhoCasa;
+    }
+    public float getCofrinhoCasa() {
+        return this.cofrinhoCasa;
+    }
+    public void saldoTotal() {
+            saldoBancario = saldoBancario + cofrinhoPc + cofrinhoCasa;
+    }
 }
