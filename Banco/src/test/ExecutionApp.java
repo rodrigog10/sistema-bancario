@@ -1,23 +1,17 @@
 package test;
 
+import domain.Bradesco;
 import domain.Cliente;
 
 import java.util.Scanner;
 
 public class ExecutionApp {
 
-
-    public static void main(String[] args) {
+    public void loginApp(Cliente cliente, Bradesco bradesco) {
         App agencia = new App();
-        Cliente cliente = new Cliente();
         Scanner input = new Scanner(System.in);
-
-
-
         boolean login = false;
-
         while (!login) {
-
             try {
                 System.out.println("Digite seu email: ");
                 String email = input.nextLine();
@@ -37,8 +31,9 @@ public class ExecutionApp {
 
             } catch (Exception e) {
                 System.out.println("Formato dos dados incorretos.");
+                input.nextLine();
             }
         }
-            agencia.iniciar(cliente);
+            agencia.iniciar(cliente, bradesco);
     }
 }

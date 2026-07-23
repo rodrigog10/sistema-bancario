@@ -1,6 +1,7 @@
 
 package test;
 
+import domain.Bradesco;
 import domain.Cliente;
 import services.*;
 
@@ -14,8 +15,7 @@ public class App {
         Transfer transfer = new Transfer();
         Loan loan = new Loan();
 
-        
-        public void iniciar(Cliente cliente) {
+        public void iniciar(Cliente cliente, Bradesco bradesco) {
 
                 try {
                         System.out.println("============================");
@@ -35,7 +35,7 @@ public class App {
                         input.nextLine();
 
                         if (opcao == 1) {
-                                deposit.depositar(cliente);
+                                deposit.depositar(cliente, bradesco);
                         } else if (opcao == 2) {
                                 draw.sacar(cliente);
                         } else if (opcao == 3) {
