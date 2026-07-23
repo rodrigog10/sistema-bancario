@@ -19,7 +19,7 @@ public class App {
 
                 try {
                         System.out.println("============================");
-                        System.out.println("=====BEM VINDO A AGÊNCIA DO BANCO=====");
+                        System.out.println("BEM VINDO A AGÊNCIA DO BANCO");
                         System.out.println("============================");
                         System.out.println("= Menu = ");
                         System.out.println("1 - Depositar");

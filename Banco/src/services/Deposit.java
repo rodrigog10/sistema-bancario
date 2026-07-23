@@ -12,23 +12,45 @@ public class Deposit {
 
     public void depositar(Cliente cliente) {
         try {
-           int soma = 0;
-            System.out.println("BRADESCO - Saldo bancário disponpivel: " + bradesco.getSaldoBancario());
-            System.out.println("Digite o valor a ser depositado: (0 para sair)");
-            float  valor = sc.nextFloat();
-            if (bradesco.getSaldoBancario() >= valor) {
-                sc.nextLine();
-                soma += valor;
-                bradesco.setSaldoBancario(soma);
-                float novoSaldo = bradesco.getSaldoBancario() + soma;
-                bradesco.setSaldoBancario(novoSaldo);
+            float valor;
+            System.out.println("Saldo disponível no App: " + bradesco.getSaldoApp());
+            System.out.println("Cofrinhos: ");
+            System.out.println("Cofrinho Pc" + bradesco.getCofrinhoPc());
+            System.out.println("Cofrinho Casa" + bradesco.getCofrinhoCasa());
 
-                System.out.println("Deposito efetuado com sucesso! O valor de R$ " + valor + " reais Foi adicionado ao seu saldo bancário no aplicativo.");
+            System.out.println("---- Selecione onde você deseja depositar: ");
+            System.out.println("1 - Cofrinho Pc");
+            System.out.println("2 - Cofrinho Casa");
+            int opcao = sc.nextInt();
+            sc.nextLine();
 
-            } else {
-                System.out.println("Saldo insuficiente.");
-            }
-            return;
+                if (opcao == 1) {
+                    if (bradesco.getSaldoApp() >= valor) {
+                        System.out.println("Digite o valor para depositar");
+                        valor = sc.nextFloat();
+                        sc.nextLine();
+
+                        float deposito1 = bradesco.getSaldoApp() - valor;
+                        bradesco.setCofrinhoPc(valor);
+                    } else {
+                        if (bradesco.getSaldoApp() < valor) {
+                            System.out.println("Saldo insuficiente");
+
+
+                        }
+                    }
+                } else if (opcao == 2) {
+                    if (bradesco.getSaldoApp() >= valor) {
+                        System.out.println("Digite o valor para depositar");
+                        valor = sc.nextFloat();
+                        sc.nextLine();
+                        float deposito2 = bradesco.getSaldoApp() - valor;
+                        bradesco.setCofrinhoCasa(deposito2);
+                    }
+                    if (bradesco.getSaldoApp() < valor) {
+                        System.out.println("Saldo insuficiente");
+                    }
+                }
         } catch (Exception e) {
             System.out.println("Um Erro inesperado aconteceu, tente novamente.");
         }

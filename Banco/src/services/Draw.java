@@ -15,14 +15,16 @@ Bradesco bradesco = new Bradesco();
         System.out.println("2 - Cofrinho Casa");
         float valor;
 
+            //Saque efetuado apenas no banco fisico.
+
             if (input.nextInt() == 1) {
                 System.out.println("Digite o valor a ser sacado");
                 valor = input.nextFloat();
                     if (valor <= 0) {
                         System.out.println("O valor deve ser maior ou igual a zero");
                     } else {
-                        double soma = bradesco.setSaldoBancario(valor);
-                        bradesco.setSaldoBancario(valor);
+                        float soma = 0;
+
                     }
             }
     }
