@@ -37,7 +37,7 @@ public class App {
                         if (opcao == 1) {
                                 deposit.depositar(cliente, bradesco);
                         } else if (opcao == 2) {
-                                draw.sacar(cliente);
+                                draw.sacar(cliente, bradesco);
                         } else if (opcao == 3) {
                               info.informacoes(cliente);
                         } else if (opcao == 4) {
