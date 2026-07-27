@@ -1,8 +1,11 @@
 package domain;
 
 public class Cliente {
+    private String nome = "José Rodrigo Bispo de Oliveira e Silva";
+    private int idade = 18;
     private String email;
     private int senha;
+
 
 
 
@@ -20,5 +23,18 @@ public class Cliente {
 
     public int getSenha() {
         return senha;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public String getNome() {
+        return nome;
+    }
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+    public int getIdade() {
+        return idade;
     }
 }

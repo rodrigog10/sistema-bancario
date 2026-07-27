@@ -39,11 +39,11 @@ public class App {
                         } else if (opcao == 2) {
                                 draw.sacar(cliente, bradesco);
                         } else if (opcao == 3) {
-                              info.informacoes(cliente);
+                              info.informacoes(cliente, bradesco);
                         } else if (opcao == 4) {
                                 transfer.transferir(cliente);
                         } else if (opcao == 5) {
-                                loan.emprestimo(cliente);
+                                loan.emprestimo(cliente, bradesco);
                         } else if (opcao == 6) {
                                 System.out.println("Saindo do banco.. Até logo!");
                                 return;

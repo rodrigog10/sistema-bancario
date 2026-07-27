@@ -1,6 +1,7 @@
 package domain;
 
 public class Bradesco {
+    private float limiteEmprestimo = 25000;
     private float saldoApp = 10000;
     private float cofrinhoPc = 3500;
     private float cofrinhoCasa = 4500;
@@ -32,5 +33,11 @@ public class Bradesco {
 
     public float getSaldoApp() {
         return  saldoApp;
+    }
+    public void setlimiteEmprestimo(float limiteEmprestimo) {
+        this.limiteEmprestimo = limiteEmprestimo;
+    }
+    public float getlimiteEmprestimo() {
+        return this.limiteEmprestimo;
     }
 }
