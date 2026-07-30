@@ -1,43 +1,53 @@
 package domain;
 
 public class Bradesco {
-    private float limiteEmprestimo = 25000;
-    private float saldoApp = 10000;
-    private float cofrinhoPc = 3500;
-    private float cofrinhoCasa = 4500;
-    private float saldoTotal;
+    private float saldoApp;
+    private float limiteEmprestimo;
+    private float cofrinhoPc;
+    private float cofrinhoCasa;
 
+    public Bradesco() {
+    }
+
+    public Bradesco(float saldoApp, float limiteEmprestimo, float cofrinhoPc, float cofrinhoCasa) {
+        this.saldoApp = saldoApp;
+        this.limiteEmprestimo = limiteEmprestimo;
+        this.cofrinhoPc = cofrinhoPc;
+        this.cofrinhoCasa = cofrinhoCasa;
+    }
+
+    public float getSaldoApp() {
+        return saldoApp;
+    }
+
+    public void setSaldoApp(float saldoApp) {
+        this.saldoApp = saldoApp;
+    }
+    public void setLimiteEmprestimo(float limiteEmprestimo) {
+        this.limiteEmprestimo = limiteEmprestimo;
+    }
+
+    public float getLimiteEmprestimo() {
+        return limiteEmprestimo;
+    }
+
+    public float getCofrinhoPc() {
+        return cofrinhoPc;
+    }
 
     public void setCofrinhoPc(float cofrinhoPc) {
         this.cofrinhoPc = cofrinhoPc;
     }
 
-    public float getCofrinhoPc() {
-        return this.cofrinhoPc;
+    public float getCofrinhoCasa() {
+        return cofrinhoCasa;
     }
 
     public void setCofrinhoCasa(float cofrinhoCasa) {
         this.cofrinhoCasa = cofrinhoCasa;
     }
 
-    public float getCofrinhoCasa() {
-        return this.cofrinhoCasa;
-    }
-
     public float getSaldoTotal() {
         return saldoApp + cofrinhoPc + cofrinhoCasa;
-    }
-    public void setSaldoApp(float saldoApp) {
-        this.saldoApp = saldoApp;
-    }
-
-    public float getSaldoApp() {
-        return  saldoApp;
-    }
-    public void setlimiteEmprestimo(float limiteEmprestimo) {
-        this.limiteEmprestimo = limiteEmprestimo;
-    }
-    public float getlimiteEmprestimo() {
-        return this.limiteEmprestimo;
     }
 }

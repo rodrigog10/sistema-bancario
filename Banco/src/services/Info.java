@@ -2,20 +2,28 @@ package services;
 
 import domain.Bradesco;
 import domain.Cliente;
-import test.App;
+
+import java.util.Scanner;
 
 public class Info {
 
-    public void informacoes(Cliente cliente, Bradesco bradesco) {
+    public void informacoes(Cliente cliente, Bradesco conta) {
         //nome, idade, saldoapp, cofrinhopc e cofrinhocasa
             try {
+                Scanner input = new Scanner(System.in);
                 System.out.println("Informações da conta: \n");
                 System.out.println("Nome: " + cliente.getNome() + "\n");
                 System.out.println("Idade: " + cliente.getIdade() + "\n");
-                System.out.println("Saldo do app: " + bradesco.getSaldoApp() + "\n");
+                System.out.println("Saldo do app: " + conta.getSaldoApp() + "\n");
                 System.out.println("Cofrinhos: " + "\n");
-                System.out.println("CofrinhoPc: " + bradesco.getCofrinhoPc() + "\n");
-                System.out.println("CofrinhoCasa: " + bradesco.getCofrinhoCasa() + "\n");
+                System.out.println("CofrinhoPc: " + conta.getCofrinhoPc() + "\n");
+                System.out.println("CofrinhoCasa: " + conta.getCofrinhoCasa() + "\n");
+
+                System.out.println("Digite 1 para voltar ao menu");
+                int valor = input.nextInt();
+                    if (valor == 1) {
+                        return ;
+                    }
             } catch (Exception e) {
                 System.out.println("Um erro inesperado aconteceu.");
             }
