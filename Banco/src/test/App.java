@@ -1,10 +1,10 @@
 
 package test;
 
-import domain.Bradesco;
 import domain.Cliente;
 import services.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -15,7 +15,8 @@ public class App {
         Transfer transfer = new Transfer();
         Loan loan = new Loan();
 
-        public void iniciar(Cliente cliente, Bradesco bradesco) {
+        public void iniciar(Cliente cliente, List<Cliente> clientes) {
+
 
                 try {
                         boolean rodando = true;
@@ -25,7 +26,7 @@ public class App {
                         System.out.println("============================");
                         System.out.println("= Menu = ");
                         System.out.println("1 - Depositar");
-                        System.out.println("2 - Sacar");
+                        System.out.println("2 - Cofre e Saque");
                         System.out.println("3 - Consultar Saldo e Perfil");
                         System.out.println("4 - Transferência (PIX)");
                         System.out.println("5 - Solicitar Empréstimo");
@@ -37,15 +38,15 @@ public class App {
                         input.nextLine();
 
                                 if (opcao == 1) {
-                                        deposit.depositar(cliente, bradesco);
+                                        deposit.depositar(cliente);
                                 } else if (opcao == 2) {
-                                        draw.sacar(cliente, bradesco);
+                                        draw.sacar(cliente);
                                 } else if (opcao == 3) {
-                                        info.informacoes(cliente, bradesco);
+                                        info.informacoes(cliente);
                                 } else if (opcao == 4) {
-                                        transfer.transferir(cliente, bradesco);
+                                        transfer.transferir(cliente, clientes);
                                 } else if (opcao == 5) {
-                                        loan.emprestimo(cliente, bradesco);
+                                        loan.emprestimo(cliente);
                                 } else if (opcao == 0) {
                                         System.out.println("Saindo do banco.. Até logo!");
                                         rodando = false;

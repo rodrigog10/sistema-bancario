@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 public class Info {
 
-    public void informacoes(Cliente cliente, Bradesco conta) {
+    public void informacoes(Cliente cliente) {
+        Bradesco conta = cliente.getConta();
         //nome, idade, saldoapp, cofrinhopc e cofrinhocasa
             try {
                 Scanner input = new Scanner(System.in);
@@ -19,9 +20,9 @@ public class Info {
                 System.out.println("CofrinhoPc: " + conta.getCofrinhoPc() + "\n");
                 System.out.println("CofrinhoCasa: " + conta.getCofrinhoCasa() + "\n");
 
-                System.out.println("Digite 1 para voltar ao menu");
+                System.out.println("Digite 0 para voltar ao menu");
                 int valor = input.nextInt();
-                    if (valor == 1) {
+                    if (valor == 0) {
                         return ;
                     }
             } catch (Exception e) {

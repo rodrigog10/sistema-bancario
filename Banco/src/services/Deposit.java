@@ -9,7 +9,8 @@ import java.util.Scanner;
 public class Deposit {
     Scanner input = new Scanner(System.in);
 
-    public void depositar(Cliente cliente, Bradesco conta) {
+    public void depositar(Cliente cliente) {
+        Bradesco conta = cliente.getConta();
 
         try {
             float valor;

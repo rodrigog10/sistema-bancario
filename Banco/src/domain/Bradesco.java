@@ -5,7 +5,6 @@ public class Bradesco {
     private float limiteEmprestimo;
     private float cofrinhoPc;
     private float cofrinhoCasa;
-
     public Bradesco() {
     }
 
@@ -14,6 +13,7 @@ public class Bradesco {
         this.limiteEmprestimo = limiteEmprestimo;
         this.cofrinhoPc = cofrinhoPc;
         this.cofrinhoCasa = cofrinhoCasa;
+
     }
 
     public float getSaldoApp() {
@@ -23,6 +23,7 @@ public class Bradesco {
     public void setSaldoApp(float saldoApp) {
         this.saldoApp = saldoApp;
     }
+
     public void setLimiteEmprestimo(float limiteEmprestimo) {
         this.limiteEmprestimo = limiteEmprestimo;
     }
@@ -50,4 +51,6 @@ public class Bradesco {
     public float getSaldoTotal() {
         return saldoApp + cofrinhoPc + cofrinhoCasa;
     }
+
+
 }

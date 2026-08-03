@@ -1,20 +1,24 @@
 package domain;
 
+
+
 public class Cliente {
     private String nome;
     private int idade;
+    private String cpf;
     private String email;
     private int senha;
+    private Bradesco conta;
 
-    // Construtor vazio (opcional)
-    public Cliente() {}
 
-    // Construtor para preencher os dados de uma vez só ao criar
-    public Cliente(String nome, int idade, String email, int senha) {
+    public Cliente(String nome, int idade, String cpf, String email, int senha, Bradesco conta) {
         this.nome = nome;
         this.idade = idade;
+        this.cpf = cpf;
         this.email = email;
         this.senha = senha;
+        this.conta = conta;
+
     }
 
     public String getNome() {
@@ -33,6 +37,10 @@ public class Cliente {
         this.idade = idade;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -47,5 +55,17 @@ public class Cliente {
 
     public void setSenha(int senha) {
         this.senha = senha;
+    }
+
+
+    public void setCliente(Cliente cliente) {
+
+    }
+
+    public void setConta(Bradesco conta) {
+        this.conta = conta;
+    }
+    public Bradesco getConta() {
+        return conta;
     }
 }
