@@ -2,6 +2,7 @@
 package test;
 
 import domain.Cliente;
+import domain.cofreBradesco;
 import services.*;
 
 import java.util.List;
@@ -10,12 +11,12 @@ import java.util.Scanner;
 public class App {
         Scanner input = new Scanner(System.in);
         Deposit deposit = new Deposit();
-        Draw draw = new Draw();
+        DrawAndSafes draw = new DrawAndSafes();
         Info info = new Info();
         Transfer transfer = new Transfer();
         Loan loan = new Loan();
 
-        public void iniciar(Cliente cliente, List<Cliente> clientes) {
+        public void iniciar(Cliente cliente, List<Cliente> clientes, List<cofreBradesco> cofres) {
 
 
                 try {
@@ -40,7 +41,7 @@ public class App {
                                 if (opcao == 1) {
                                         deposit.depositar(cliente);
                                 } else if (opcao == 2) {
-                                        draw.sacar(cliente);
+                                        draw.cofres(cliente, cofres);
                                 } else if (opcao == 3) {
                                         info.informacoes(cliente);
                                 } else if (opcao == 4) {

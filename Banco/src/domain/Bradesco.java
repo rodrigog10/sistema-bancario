@@ -1,19 +1,22 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Bradesco {
     private float saldoApp;
     private float limiteEmprestimo;
-    private float cofrinhoPc;
-    private float cofrinhoCasa;
+    private List<cofreBradesco> cofres = new ArrayList<>();
+
+
     public Bradesco() {
     }
 
-    public Bradesco(float saldoApp, float limiteEmprestimo, float cofrinhoPc, float cofrinhoCasa) {
+    public Bradesco(float saldoApp, float limiteEmprestimo, float cofrinhoPc, float cofrinhoCasa, List<cofreBradesco> cofres) {
         this.saldoApp = saldoApp;
         this.limiteEmprestimo = limiteEmprestimo;
-        this.cofrinhoPc = cofrinhoPc;
-        this.cofrinhoCasa = cofrinhoCasa;
-
+        this.cofres = cofres;
     }
 
     public float getSaldoApp() {
@@ -32,25 +35,6 @@ public class Bradesco {
         return limiteEmprestimo;
     }
 
-    public float getCofrinhoPc() {
-        return cofrinhoPc;
-    }
-
-    public void setCofrinhoPc(float cofrinhoPc) {
-        this.cofrinhoPc = cofrinhoPc;
-    }
-
-    public float getCofrinhoCasa() {
-        return cofrinhoCasa;
-    }
-
-    public void setCofrinhoCasa(float cofrinhoCasa) {
-        this.cofrinhoCasa = cofrinhoCasa;
-    }
-
-    public float getSaldoTotal() {
-        return saldoApp + cofrinhoPc + cofrinhoCasa;
-    }
 
 
 }

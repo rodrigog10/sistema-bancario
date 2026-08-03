@@ -11,7 +11,7 @@ public class Cliente {
     private Bradesco conta;
 
 
-    public Cliente(String nome, int idade, String cpf, String email, int senha, Bradesco conta) {
+    public Cliente(String nome, int idade, String cpf, String email, int senha, Bradesco conta ) {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
@@ -20,6 +20,7 @@ public class Cliente {
         this.conta = conta;
 
     }
+
 
     public String getNome() {
         return nome;

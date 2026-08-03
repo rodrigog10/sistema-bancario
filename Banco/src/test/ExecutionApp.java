@@ -1,13 +1,14 @@
 package test;
 
 import domain.Cliente;
+import domain.cofreBradesco;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class ExecutionApp {
 
-    public void loginApp(List<Cliente> clientes) {
+    public void loginApp(List<Cliente> clientes, List<cofreBradesco> cofres) {
         App agencia = new App();
         Scanner input = new Scanner(System.in);
         boolean login = false;
@@ -34,7 +35,7 @@ public class ExecutionApp {
                     if (login) {
                         System.out.println("Bem vindo, " + clienteLogado.getNome());
 
-                        agencia.iniciar(clienteLogado, clientes);
+                        agencia.iniciar(clienteLogado, clientes, cofres);
                     } else {
                         System.out.println("E-mail ou senha incorretos, tente novamente.\n");
                     }
