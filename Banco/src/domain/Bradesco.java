@@ -7,10 +7,12 @@ public class Bradesco {
     private float saldoApp;
     private float limiteEmprestimo;
     private List<cofreBradesco> cofres = new ArrayList<>();
-    private cofreBradesco cofre;
+
+
 
     public Bradesco() {
     }
+
     public Bradesco(float saldoApp, float limiteEmprestimo, List<cofreBradesco> cofres) {
         this.saldoApp = saldoApp;
         this.limiteEmprestimo = limiteEmprestimo;

@@ -17,7 +17,6 @@ public class Cliente {
         this.email = email;
         this.senha = senha;
         this.conta = conta;
-
     }
 
     public String getNome() {
