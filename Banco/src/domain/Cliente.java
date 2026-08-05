@@ -10,7 +10,6 @@ public class Cliente {
     private int senha;
     private Bradesco conta;
 
-
     public Cliente(String nome, int idade, String cpf, String email, int senha, Bradesco conta ) {
         this.nome = nome;
         this.idade = idade;
@@ -20,7 +19,6 @@ public class Cliente {
         this.conta = conta;
 
     }
-
 
     public String getNome() {
         return nome;
@@ -58,15 +56,13 @@ public class Cliente {
         this.senha = senha;
     }
 
-
-    public void setCliente(Cliente cliente) {
-
-    }
-
     public void setConta(Bradesco conta) {
         this.conta = conta;
     }
+
     public Bradesco getConta() {
         return conta;
     }
+
+
 }

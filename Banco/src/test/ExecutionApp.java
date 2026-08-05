@@ -41,8 +41,8 @@ public class ExecutionApp {
                     }
 
                 } catch (Exception e) {
-                    System.out.println("Formato dos dados incorretos.");
-                    input.nextLine();
+                    System.out.println("Erro: " + e.getMessage());
+                    e.printStackTrace();
                 }
             }
         }

@@ -14,7 +14,7 @@ public class Loan {
             System.out.println("Digite o valor para resgatar do emprestimo (limite máximo: "+conta.getLimiteEmprestimo() + ")");
             float valor = input.nextFloat();
                 if (valor > conta.getLimiteEmprestimo()) {
-                    System.out.println("O limite do empréstimo é de R$ " +  conta.getLimiteEmprestimo());
+                    System.out.println("O limite do empréstimo é de R$" +  conta.getLimiteEmprestimo());
                 } else if (valor == 0) {
                     System.out.println("Valor inválido.");
                 } else {
@@ -24,6 +24,8 @@ public class Loan {
                 }
         } catch (Exception e) {
             System.out.println("Um erro inesperado aconteceu.");
+            System.out.println("Erro: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

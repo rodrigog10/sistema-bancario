@@ -26,6 +26,8 @@ public class Info {
                     }
             } catch (Exception e) {
                 System.out.println("Um erro inesperado aconteceu.");
+                System.out.println("Erro: " + e.getMessage());
+                e.printStackTrace();
             }
     }
 }

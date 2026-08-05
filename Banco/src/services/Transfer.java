@@ -24,7 +24,7 @@ public class Transfer {
             }
 
             if (clientAcess) {
-                System.out.println("Digite o valor a ser transferido para :" + clienteEncontrado.getNome());
+                System.out.println("Digite o valor a ser transferido para " + clienteEncontrado.getNome());
                 valor = input.nextFloat();
                 if (contaRemetente.getSaldoApp() < valor) {
                     System.out.println("Saldo insuficiente.");
@@ -42,6 +42,8 @@ public class Transfer {
 
         } catch (Exception e) {
             System.out.println("Um erro inesperado aconteceu.");
+            System.out.println("Erro: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }

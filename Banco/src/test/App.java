@@ -41,7 +41,7 @@ public class App {
                                 if (opcao == 1) {
                                         deposit.depositar(cliente);
                                 } else if (opcao == 2) {
-                                        draw.cofres(cliente, cofres);
+                                        draw.cofre(cliente);
                                 } else if (opcao == 3) {
                                         info.informacoes(cliente);
                                 } else if (opcao == 4) {
@@ -57,6 +57,8 @@ public class App {
 
                 } catch (Exception e) {
                         System.out.println("Um erro inesperado aconteceu, tente novamente.");
+                        System.out.println("Erro: " + e.getMessage());
+                        e.printStackTrace();
                 }
         }
 
