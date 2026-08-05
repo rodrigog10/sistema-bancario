@@ -8,8 +8,6 @@ public class Bradesco {
     private float limiteEmprestimo;
     private List<cofreBradesco> cofres = new ArrayList<>();
 
-
-
     public Bradesco() {
     }
 

@@ -14,27 +14,29 @@ public class DrawAndSafes {
         Bradesco conta = cliente.getConta();
 
         System.out.println("Selecione a opção que deseja utilizar: ");
-        System.out.println("1 - Visualizar Cofrinhos: ");
-        System.out.println("2 - Criar novo Cofrinho: ");
-        System.out.println("3 - Voltar: ");
+        System.out.println("1 - Visualizar Cofrinhos");
+        System.out.println("2 - Criar novo Cofrinho");
+        System.out.println("3 - Voltar");
         int opcao = input.nextInt();
         input.nextLine();
 
 
         if (opcao == 1) {
-            for (int i = 0; i < conta.getCofres().size(); i++) {
-                if (conta.getCofres().isEmpty()) {
-                    System.out.println("Você ainda não tem nenhum cofrinho.");
-                    input.nextLine();
+            if (conta.getCofres().isEmpty()) {
+                System.out.println("Você não tem cofrinhos registrados.");
+                System.out.println("Pressione ENTER para voltar ao menu...");
+                input.nextLine();
+                return;
+            }
 
-                } else if (!conta.getCofres().isEmpty()) {
-                    cofreBradesco c = conta.getCofres().get(i);
-                    // Posição exposta ao cliente por meio da contagem iniciada por 1.
-                    System.out.println((i + 1) + " - Nome: " + c.getNomeCofre());
-                    //AJEITAR ESSA BAGAÇA AQUI
-                }
+            System.out.println("\nCofrinhos: ");
+            for (int i = 0; i < conta.getCofres().size(); i++) {
+                cofreBradesco c = conta.getCofres().get(i);
+
+                System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + " | Saldo: R$ " + c.getSaldoCofre());
             }
         }
+
 
         else if (opcao == 2) {
             System.out.println("Digite o nome do cofrinho: ");
@@ -44,23 +46,38 @@ public class DrawAndSafes {
             String objetivo = input.nextLine();
 
             System.out.println("Deseja inserir valor no " + nome + "?");
-            System.out.println("1 - Sim \n 2 - Não");
+            System.out.println("1 - Sim \n2 - Não");
             int opcaoInserir = input.nextInt();
+            input.nextLine();
 
             if (opcaoInserir == 1) {
                 System.out.println("Digite o valor a ser inserido: ");
                 float novoValorCofre = input.nextFloat();
+                input.nextLine();
+
 
                 if (conta.getSaldoApp() < novoValorCofre) {
-                    System.out.println("Saldo insuficiente.");
+                    System.out.println("Saldo insuficiente! O cofrinho não foi criado.");
                 } else {
+
+                    float novoSaldoDoApp = conta.getSaldoApp() - novoValorCofre;
+                    conta.setSaldoApp(novoSaldoDoApp);
+
                     conta.getCofres().add(new cofreBradesco(nome, objetivo, novoValorCofre));
-                    System.out.println("O cofrinho foi criado com saldo inicial de: R$" + novoValorCofre + ".");
+                    System.out.println("O cofrinho '" + nome + "' foi criado com saldo inicial de: R$ " + novoValorCofre);
                 }
             } else {
-                conta.getCofres().add(new cofreBradesco(nome, objetivo, 0));
 
+                conta.getCofres().add(new cofreBradesco(nome, objetivo, 0));
+                System.out.println("O cofrinho '" + nome + "' foi criado com R$ 0,00.");
             }
+        }
+
+        // ==========================================
+        // OPÇÃO 3: VOLTAR
+        // ==========================================
+        else if (opcao == 3) {
+            System.out.println("Voltando ao menu principal..");
         }
     }
 }
