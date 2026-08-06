@@ -11,10 +11,11 @@ import java.util.Scanner;
 public class App {
         Scanner input = new Scanner(System.in);
         Deposit deposit = new Deposit();
-        DrawAndSafes draw = new DrawAndSafes();
+        Draw draw = new Draw();
         Info info = new Info();
         Transfer transfer = new Transfer();
         Loan loan = new Loan();
+        Safes safes = new Safes();
 
         public void iniciar(Cliente cliente, List<Cliente> clientes, List<cofreBradesco> cofres) {
 
@@ -25,28 +26,32 @@ public class App {
                         System.out.println("============================");
                         System.out.println("BEM VINDO A AGÊNCIA DO BANCO");
                         System.out.println("============================");
-                        System.out.println("= Menu = ");
+
+                        System.out.println("   Menu  \n");
                         System.out.println("1 - Depositar");
-                        System.out.println("2 - Cofre e Saque");
-                        System.out.println("3 - Consultar Saldo e Perfil");
-                        System.out.println("4 - Transferência (PIX)");
-                        System.out.println("5 - Solicitar Empréstimo");
+                        System.out.println("2 - Sacar / AINDA NAO");
+                        System.out.println("3 - Cofre");
+                        System.out.println("4 - Consultar Saldo e Perfil");
+                        System.out.println("5 - Transferência (PIX)");
+                        System.out.println("6 - Solicitar Empréstimo");
                         System.out.println("0 - Sair do Sistema\n ");
                         System.out.println("============================");
 
-                        System.out.println("Selecione a opção desejada: ");
+                        System.out.println("Selecione a opção desejada: \n");
                         int opcao = input.nextInt();
                         input.nextLine();
 
                                 if (opcao == 1) {
                                         deposit.depositar(cliente);
                                 } else if (opcao == 2) {
-                                        draw.cofre(cliente);
+                                        safes.sacar(cliente);
                                 } else if (opcao == 3) {
-                                        info.informacoes(cliente);
+                                        draw.cofre(cliente);
                                 } else if (opcao == 4) {
-                                        transfer.transferir(cliente, clientes);
+                                        info.informacoes(cliente);
                                 } else if (opcao == 5) {
+                                        transfer.transferir(cliente, clientes);
+                                } else if (opcao == 6) {
                                         loan.emprestimo(cliente);
                                 } else if (opcao == 0) {
                                         System.out.println("Saindo do banco.. Até logo!");

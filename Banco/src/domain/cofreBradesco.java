@@ -31,7 +31,8 @@ public class cofreBradesco {
         return saldoCofre;
     }
 
-    public void setSaldoCofre(float saldoCofre) {
+    public float setSaldoCofre(float saldoCofre) {
         this.saldoCofre = saldoCofre;
+        return saldoCofre;
     }
 }

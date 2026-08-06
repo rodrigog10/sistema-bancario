@@ -6,7 +6,7 @@ import domain.cofreBradesco;
 
 import java.util.Scanner;
 
-public class DrawAndSafes {
+public class Draw {
 
     Scanner input = new Scanner(System.in);
 
@@ -27,13 +27,14 @@ public class DrawAndSafes {
                 System.out.println("Pressione ENTER para voltar ao menu...");
                 input.nextLine();
                 return;
-            }
-
-            System.out.println("\nCofrinhos: ");
-            for (int i = 0; i < conta.getCofres().size(); i++) {
-                cofreBradesco c = conta.getCofres().get(i);
-
-                System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + " | Saldo: R$ " + c.getSaldoCofre());
+            } else {
+                System.out.println("\nCofrinhos: ");
+                for (int i = 0; i < conta.getCofres().size(); i++) {
+                    cofreBradesco c = conta.getCofres().get(i);
+                    System.out.println((i + 1) + "\n - Nome: " + c.getNomeCofre() + "\n - Objetivo: " + c.getObjetivoCofre() + "\n - Saldo: R$ " + c.getSaldoCofre()  );
+                    System.out.println("Digite qualquer tecla para voltar ao menu.");
+                    input.nextLine();
+                }
             }
         }
 
@@ -58,18 +59,26 @@ public class DrawAndSafes {
 
                 if (conta.getSaldoApp() < novoValorCofre) {
                     System.out.println("Saldo insuficiente! O cofrinho não foi criado.");
+                    System.out.println("Digite qualquer tecla para voltar ao menu. ");
+                    input.nextLine();
+
                 } else {
 
                     float novoSaldoDoApp = conta.getSaldoApp() - novoValorCofre;
                     conta.setSaldoApp(novoSaldoDoApp);
-
-                    conta.getCofres().add(new cofreBradesco(nome, objetivo, novoValorCofre));
-                    System.out.println("O cofrinho '" + nome + "' foi criado com saldo inicial de: R$ " + novoValorCofre);
+                    cofreBradesco novoCofre = new cofreBradesco(nome, objetivo, novoValorCofre);
+                    conta.getCofres().add(novoCofre);
+                    System.out.println("O cofrinho '" + nome + "' foi aprovado com saldo inicial de: R$ " + novoValorCofre +".");
+                    System.out.println("\n Digite qualquer  tecla para voltar ao menu. \n");
+                    input.nextLine();
                 }
             } else {
 
                 conta.getCofres().add(new cofreBradesco(nome, objetivo, 0));
                 System.out.println("O cofrinho '" + nome + "' foi criado com R$ 0,00.");
+                System.out.println("\n Digite qualquer  tecla para voltar ao menu. \n");
+                input.nextLine();
+
             }
         }
 
