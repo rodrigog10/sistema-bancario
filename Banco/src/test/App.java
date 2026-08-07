@@ -29,7 +29,7 @@ public class App {
 
                         System.out.println("   Menu  \n");
                         System.out.println("1 - Depositar");
-                        System.out.println("2 - Sacar / AINDA NAO");
+                        System.out.println("2 - Sacar");
                         System.out.println("3 - Cofre");
                         System.out.println("4 - Consultar Saldo e Perfil");
                         System.out.println("5 - Transferência (PIX)");

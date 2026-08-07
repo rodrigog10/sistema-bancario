@@ -15,8 +15,10 @@ public class Draw {
 
         System.out.println("Selecione a opção que deseja utilizar: ");
         System.out.println("1 - Visualizar Cofrinhos");
+        System.out.println("2 - Editar Cofrinhos");
         System.out.println("2 - Criar novo Cofrinho");
-        System.out.println("3 - Voltar");
+
+        System.out.println("0 - Voltar");
         int opcao = input.nextInt();
         input.nextLine();
 
@@ -27,7 +29,8 @@ public class Draw {
                 System.out.println("Pressione ENTER para voltar ao menu...");
                 input.nextLine();
                 return;
-            } else {
+            }
+            else {
                 System.out.println("\nCofrinhos: ");
                 for (int i = 0; i < conta.getCofres().size(); i++) {
                     cofreBradesco c = conta.getCofres().get(i);
@@ -36,10 +39,20 @@ public class Draw {
                     input.nextLine();
                 }
             }
-        }
+        } else if (opcao == 2) {
+            for (int i = 0; i < conta.getCofres().size(); i++) {
+                cofreBradesco e = conta.getCofres().get(i);
+                System.out.println((i + 1) + "\n - Nome: " + e.getNomeCofre() + "\n - Objetivo: " + e.getObjetivoCofre() + "\n - Saldo: R$ " + e.getSaldoCofre());
+            }
+            System.out.println("Selecione o cofrinho que deseja editar: ");
+                int opcao2 = input.nextInt();
+                int indice = opcao2 - 1;
+                    if (indice >= 0 && indice < conta.getCofres().size()) {
+
+                    }
 
 
-        else if (opcao == 2) {
+        } else if (opcao == 3) {
             System.out.println("Digite o nome do cofrinho: ");
             String nome = input.nextLine();
 
@@ -85,7 +98,7 @@ public class Draw {
         // ==========================================
         // OPÇÃO 3: VOLTAR
         // ==========================================
-        else if (opcao == 3) {
+        else if (opcao == 0) {
             System.out.println("Voltando ao menu principal..");
         }
     }
