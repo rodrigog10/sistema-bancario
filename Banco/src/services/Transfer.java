@@ -1,4 +1,5 @@
 package services;
+
 import domain.Bradesco;
 import domain.Cliente;
 import java.util.List;
@@ -13,38 +14,47 @@ public class Transfer {
         float valor = 0;
 
         try {
-            System.out.println("Digite o email ou cpf do cliente: ");
+            System.out.println("Digite o e-mail ou CPF do destinatário: ");
             String contaDigitada = input.nextLine();
+
             for (int i = 0; i < clientes.size(); i++) {
                 if (clientes.get(i).getEmail().equals(contaDigitada) || clientes.get(i).getCpf().equals(contaDigitada)) {
                     clientAcess = true;
-                    clienteEncontrado = clientes.get(i); // guardado
+                    clienteEncontrado = clientes.get(i);
                     break;
                 }
             }
 
             if (clientAcess) {
-                System.out.println("Digite o valor a ser transferido para " + clienteEncontrado.getNome());
+                System.out.println("Digite o valor a ser transferido para " + clienteEncontrado.getNome() + ":");
                 valor = input.nextFloat();
+                input.nextLine();
+
                 if (contaRemetente.getSaldoApp() < valor) {
-                    System.out.println("Saldo insuficiente.");
+                    System.out.println("Saldo insuficiente na conta principal!");
+                    System.out.println("Pressione ENTER para voltar ao menu...");
+                    input.nextLine();
                 } else {
                     Bradesco contaDestinatario = clienteEncontrado.getConta();
                     float novoSaldoQuemEnvia = contaRemetente.getSaldoApp() - valor;
-                    contaRemetente.setSaldoApp(novoSaldoQuemEnvia); // novo saldo definido
+                    contaRemetente.setSaldoApp(novoSaldoQuemEnvia);
 
-                    contaDestinatario.setSaldoApp(contaDestinatario.getSaldoApp() + valor); // novo saldo definido
-                    System.out.println("Maravilha! o valor de " + valor + " foi enviado para " + clienteEncontrado.getNome() + " com sucesso! ");
+                    contaDestinatario.setSaldoApp(contaDestinatario.getSaldoApp() + valor);
+
+                    System.out.println("\nTransferência de R$ " + valor + " para " + clienteEncontrado.getNome() + " realizada com sucesso!");
+                    System.out.println("Saldo restante no App: R$ " + novoSaldoQuemEnvia);
+                    System.out.println("\nPressione ENTER para voltar ao menu...");
+                    input.nextLine();
                 }
             } else {
-                System.out.println("Cliente não encontrado com esse e-mail/CPF.");
+                System.out.println("Nenhum cliente foi encontrado com este e-mail ou CPF.");
+                System.out.println("Pressione ENTER para voltar ao menu...");
+                input.nextLine();
             }
 
         } catch (Exception e) {
-            System.out.println("Um erro inesperado aconteceu.");
-            System.out.println("Erro: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Um erro inesperado aconteceu, tente novamente.");
+            input.nextLine();
         }
-
     }
 }
