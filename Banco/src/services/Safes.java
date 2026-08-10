@@ -20,7 +20,7 @@ public class Safes {
                 return;
             }
 
-            System.out.println("- Seus Cofrinhos - \n");
+            System.out.println("\n=== SEUS COFRINHOS ===");
             System.out.println("Selecione o cofrinho do qual deseja sacar:");
 
             for (int i = 0; i < conta.getCofres().size(); i++) {
@@ -43,30 +43,28 @@ public class Safes {
                 if (valor <= 0) {
                     System.out.println("O valor do saque deve ser maior que zero!");
                 } else if (valor > cofreSelecionado.getSaldoCofre()) {
-                    System.out.println("Saldo do cofrinho insuficiente.");
+                    System.out.println("Saldo do cofrinho insuficiente!");
                     System.out.println("Saldo atual do cofrinho: R$ " + cofreSelecionado.getSaldoCofre());
                 } else {
-
                     float novoSaldoApp = conta.getSaldoApp() + valor;
                     conta.setSaldoApp(novoSaldoApp);
-
 
                     float novoSaldoCofre = cofreSelecionado.getSaldoCofre() - valor;
                     cofreSelecionado.setSaldoCofre(novoSaldoCofre);
 
-                    System.out.println("\nSaque realizado com sucesso!");
+                    System.out.println("\nSaque do cofrinho realizado com sucesso!");
                     System.out.println("Novo saldo do cofrinho: R$ " + novoSaldoCofre);
-                    System.out.println("Novo saldo do App: R$ " + novoSaldoApp);
+                    System.out.println("Novo saldo no App: R$ " + novoSaldoApp);
                 }
             } else {
                 System.out.println("Opção inválida!");
             }
 
-            System.out.println("\nPressione ENTER para voltar ao menu:");
+            System.out.println("\nPressione ENTER para voltar ao menu...");
             input.nextLine();
 
         } catch (InputMismatchException e) {
-            System.out.println("Erro: Você deve digitar apenas números!");
+            System.out.println("Erro: Entrada inválida! Digite apenas números.");
             input.nextLine();
         } catch (Exception e) {
             System.out.println("Um erro inesperado aconteceu, tente novamente.");
