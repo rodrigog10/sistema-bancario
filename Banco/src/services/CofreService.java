@@ -2,11 +2,11 @@ package services;
 
 import domain.Bradesco;
 import domain.Cliente;
-import domain.cofreBradesco;
+import domain.CofreBradesco;
 
 import java.util.Scanner;
 
-public class Draw {
+public class CofreService {
 
     Scanner input = new Scanner(System.in);
 
@@ -31,7 +31,7 @@ public class Draw {
                 } else {
                     System.out.println("\n=== SEUS COFRINHOS ===");
                     for (int i = 0; i < conta.getCofres().size(); i++) {
-                        cofreBradesco c = conta.getCofres().get(i);
+                        CofreBradesco c = conta.getCofres().get(i);
                         System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + " | Objetivo: " + c.getObjetivoCofre() + " | Saldo: R$ " + c.getSaldoCofre());
                     }
                     System.out.println("\nPressione ENTER para voltar ao menu...");
@@ -46,7 +46,7 @@ public class Draw {
                 } else {
                     System.out.println("\n=== SEUS COFRINHOS ===");
                     for (int i = 0; i < conta.getCofres().size(); i++) {
-                        cofreBradesco e = conta.getCofres().get(i);
+                        CofreBradesco e = conta.getCofres().get(i);
                         System.out.println((i + 1) + " - Nome: " + e.getNomeCofre() + " | Saldo: R$ " + e.getSaldoCofre());
                     }
                 }
@@ -58,7 +58,7 @@ public class Draw {
                 int indice = opcaoCofre - 1;
 
                 if (indice >= 0 && indice < conta.getCofres().size()) {
-                    cofreBradesco cofreSelecionado = conta.getCofres().get(indice);
+                    CofreBradesco cofreSelecionado = conta.getCofres().get(indice);
 
                     System.out.println("\nGerenciando o cofrinho '" + cofreSelecionado.getNomeCofre() + "':");
                     System.out.println("1 - Alterar Nome");
@@ -128,14 +128,14 @@ public class Draw {
                     } else {
                         float novoSaldoDoApp = conta.getSaldoApp() - novoValorCofre;
                         conta.setSaldoApp(novoSaldoDoApp);
-                        cofreBradesco novoCofre = new cofreBradesco(nome, objetivo, novoValorCofre);
+                        CofreBradesco novoCofre = new CofreBradesco(nome, objetivo, novoValorCofre);
                         conta.getCofres().add(novoCofre);
                         System.out.println("O cofrinho '" + nome + "' foi criado com saldo inicial de: R$ " + novoValorCofre + ".");
                         System.out.println("Pressione ENTER para voltar ao menu...");
                         input.nextLine();
                     }
                 } else {
-                    conta.getCofres().add(new cofreBradesco(nome, objetivo, 0));
+                    conta.getCofres().add(new CofreBradesco(nome, objetivo, 0));
                     System.out.println("O cofrinho '" + nome + "' foi criado com R$ 0,00.");
                     System.out.println("Pressione ENTER para voltar ao menu...");
                     input.nextLine();

@@ -1,11 +1,11 @@
 package domain;
 
-public class cofreBradesco {
+public class CofreBradesco {
     private String nomeCofre;
     private String objetivoCofre;
     private float saldoCofre;
 
-    public cofreBradesco(String nomeCofre, String objetivoCofre, float saldoCofre) {
+    public CofreBradesco(String nomeCofre, String objetivoCofre, float saldoCofre) {
         this.nomeCofre = nomeCofre;
         this.objetivoCofre = objetivoCofre;
         this.saldoCofre = saldoCofre;

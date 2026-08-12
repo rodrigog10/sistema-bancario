@@ -2,11 +2,11 @@ package services;
 
 import domain.Bradesco;
 import domain.Cliente;
-import domain.cofreBradesco;
+import domain.CofreBradesco;
 
 import java.util.Scanner;
 
-public class Info {
+public class AccountInfoService {
 
     public void informacoes(Cliente cliente) {
         Bradesco conta = cliente.getConta();
@@ -25,7 +25,7 @@ public class Info {
                 System.out.println("Você não possui nenhum cofrinho cadastrado.\n");
             } else {
                 for (int i = 0; i < conta.getCofres().size(); i++) {
-                    cofreBradesco c = conta.getCofres().get(i);
+                    CofreBradesco c = conta.getCofres().get(i);
                     System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + " | Saldo: R$ " + c.getSaldoCofre());
                 }
                 System.out.println();

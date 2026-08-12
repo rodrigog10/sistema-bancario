@@ -2,11 +2,11 @@ package services;
 
 import domain.Bradesco;
 import domain.Cliente;
-import domain.cofreBradesco;
+import domain.CofreBradesco;
 
 import java.util.Scanner;
 
-public class Deposit {
+public class DepositService {
     Scanner input = new Scanner(System.in);
 
     public void depositar(Cliente cliente) {
@@ -25,7 +25,7 @@ public class Deposit {
             System.out.println("Selecione o cofrinho no qual deseja depositar: ");
 
             for (int i = 0; i < conta.getCofres().size(); i++) {
-                cofreBradesco c = conta.getCofres().get(i);
+                CofreBradesco c = conta.getCofres().get(i);
                 System.out.println((i + 1) + " - " + c.getNomeCofre() + " (Saldo: R$ " + c.getSaldoCofre() + ")");
             }
 
@@ -35,7 +35,7 @@ public class Deposit {
             int indice = opcao - 1;
 
             if (indice >= 0 && indice < conta.getCofres().size()) {
-                cofreBradesco cofreSelecionado = conta.getCofres().get(indice);
+                CofreBradesco cofreSelecionado = conta.getCofres().get(indice);
 
                 System.out.println("\nNome: " + cofreSelecionado.getNomeCofre());
                 System.out.println("Objetivo: " + cofreSelecionado.getObjetivoCofre());

@@ -5,7 +5,7 @@ import domain.Cliente;
 import java.util.List;
 import java.util.Scanner;
 
-public class Transfer {
+public class TransferService {
     public void transferir(Cliente remetente, List<Cliente> clientes) {
         Bradesco contaRemetente = remetente.getConta();
         Cliente clienteEncontrado = null;
@@ -18,9 +18,20 @@ public class Transfer {
             String contaDigitada = input.nextLine();
 
             for (int i = 0; i < clientes.size(); i++) {
-                if (clientes.get(i).getEmail().equals(contaDigitada) || clientes.get(i).getCpf().equals(contaDigitada)) {
+                Cliente candidato = clientes.get(i);
+
+                if (candidato.getEmail().equals(contaDigitada) || candidato.getCpf().equals(contaDigitada)) {
+
+
+                    if (candidato.getCpf().equals(remetente.getCpf())) {
+                        System.out.println("\nOperação inválida: Você não pode transferir dinheiro para a sua própria conta!");
+                        System.out.println("Pressione ENTER para voltar ao menu...");
+                        input.nextLine();
+                        return;
+                    }
+
                     clientAcess = true;
-                    clienteEncontrado = clientes.get(i);
+                    clienteEncontrado = candidato;
                     break;
                 }
             }
@@ -30,7 +41,11 @@ public class Transfer {
                 valor = input.nextFloat();
                 input.nextLine();
 
-                if (contaRemetente.getSaldoApp() < valor) {
+                if (valor <= 0) {
+                    System.out.println("O valor da transferência deve ser maior que zero!");
+                    System.out.println("Pressione ENTER para voltar ao menu...");
+                    input.nextLine();
+                } else if (contaRemetente.getSaldoApp() < valor) {
                     System.out.println("Saldo insuficiente na conta principal!");
                     System.out.println("Pressione ENTER para voltar ao menu...");
                     input.nextLine();

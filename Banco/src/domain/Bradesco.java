@@ -6,12 +6,12 @@ import java.util.List;
 public class Bradesco {
     private float saldoApp;
     private float limiteEmprestimo;
-    private List<cofreBradesco> cofres = new ArrayList<>();
+    private List<CofreBradesco> cofres = new ArrayList<>();
 
     public Bradesco() {
     }
 
-    public Bradesco(float saldoApp, float limiteEmprestimo, List<cofreBradesco> cofres) {
+    public Bradesco(float saldoApp, float limiteEmprestimo, List<CofreBradesco> cofres) {
         this.saldoApp = saldoApp;
         this.limiteEmprestimo = limiteEmprestimo;
         this.cofres = cofres;
@@ -34,10 +34,10 @@ public class Bradesco {
         return limiteEmprestimo;
     }
 
-    public void setCofres(List<cofreBradesco> cofres) {
+    public void setCofres(List<CofreBradesco> cofres) {
         this.cofres = cofres;
     }
-    public List<cofreBradesco> getCofres() {
+    public List<CofreBradesco> getCofres() {
         return cofres;
     }
 

@@ -1,14 +1,14 @@
-package test;
+package view;
 
 import domain.Cliente;
-import domain.cofreBradesco;
+import domain.CofreBradesco;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class ExecutionApp {
 
-    public void loginApp(List<Cliente> clientes, List<cofreBradesco> cofres) {
+    public void loginApp(List<Cliente> clientes, List<CofreBradesco> cofres) {
         App agencia = new App();
         Scanner input = new Scanner(System.in);
         boolean login = false;

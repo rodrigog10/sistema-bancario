@@ -2,12 +2,12 @@ package services;
 
 import domain.Bradesco;
 import domain.Cliente;
-import domain.cofreBradesco;
+import domain.CofreBradesco;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Safes {
+public class WithdrawService {
     public void sacar(Cliente cliente) {
         Scanner input = new Scanner(System.in);
         Bradesco conta = cliente.getConta();
@@ -24,7 +24,7 @@ public class Safes {
             System.out.println("Selecione o cofrinho do qual deseja sacar:");
 
             for (int i = 0; i < conta.getCofres().size(); i++) {
-                cofreBradesco cofre = conta.getCofres().get(i);
+                CofreBradesco cofre = conta.getCofres().get(i);
                 System.out.println((i + 1) + " - " + cofre.getNomeCofre() + " (Saldo: R$ " + cofre.getSaldoCofre() + ")");
             }
 
@@ -34,7 +34,7 @@ public class Safes {
             int indice = opcao - 1;
 
             if (indice >= 0 && indice < conta.getCofres().size()) {
-                cofreBradesco cofreSelecionado = conta.getCofres().get(indice);
+                CofreBradesco cofreSelecionado = conta.getCofres().get(indice);
 
                 System.out.println("Digite o valor que deseja sacar:");
                 float valor = input.nextFloat();

@@ -1,7 +1,7 @@
-package test;
+package view;
 
 import domain.Cliente;
-import domain.cofreBradesco;
+import domain.CofreBradesco;
 import services.*;
 
 import java.util.List;
@@ -9,14 +9,14 @@ import java.util.Scanner;
 
 public class App {
         Scanner input = new Scanner(System.in);
-        Deposit deposit = new Deposit();
-        Draw draw = new Draw();
-        Info info = new Info();
-        Transfer transfer = new Transfer();
-        Loan loan = new Loan();
-        Safes safes = new Safes();
+        DepositService deposit = new DepositService();
+        CofreService draw = new CofreService();
+        AccountInfoService info = new AccountInfoService();
+        TransferService transfer = new TransferService();
+        LoanService loan = new LoanService();
+        WithdrawService safes = new WithdrawService();
 
-        public void iniciar(Cliente cliente, List<Cliente> clientes, List<cofreBradesco> cofres) {
+        public void iniciar(Cliente cliente, List<Cliente> clientes, List<CofreBradesco> cofres) {
                 try {
                         boolean rodando = true;
                         while (rodando) {

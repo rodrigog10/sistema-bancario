@@ -4,7 +4,7 @@ import domain.Bradesco;
 import domain.Cliente;
 import java.util.Scanner;
 
-public class Loan {
+public class LoanService {
 
     public void emprestimo(Cliente cliente) {
         Bradesco conta = cliente.getConta();
