@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class App {
         Scanner input = new Scanner(System.in);
-        DepositService deposit = new DepositService();
+        DepositView depositView = new DepositView();
         CofreService draw = new CofreService();
         AccountInfoService info = new AccountInfoService();
         TransferService transfer = new TransferService();
@@ -39,7 +39,7 @@ public class App {
                                 input.nextLine();
 
                                 if (opcao == 1) {
-                                        deposit.depositar(cliente);
+                                        depositView.exibirMenuDeposito(cliente);
                                 } else if (opcao == 2) {
                                         safes.sacar(cliente);
                                 } else if (opcao == 3) {
