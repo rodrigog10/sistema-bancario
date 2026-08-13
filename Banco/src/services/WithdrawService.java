@@ -4,31 +4,39 @@ import domain.Bradesco;
 import domain.Cliente;
 import domain.CofreBradesco;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 public class WithdrawService {
-    public WithdrawResult sacar(Cliente cliente, int opcaoCofre, float valorSaque) {
-        Scanner input = new Scanner(System.in);
+    public OperationResult sacar(Cliente cliente, int opcaoCofre, float valorSaque) {
         Bradesco conta = cliente.getConta();
 
             if (conta.getCofres().isEmpty()) {
-                return WithdrawResult.erro("Você não possui cofrinhos registrados.");
+                return OperationResult.erro("Você não possui cofrinhos registrados.");
             }
+
             int indice = opcaoCofre - 1;
+
+            if (indice < 0 || indice >= conta.getCofres().size()) {
+                return OperationResult.erro("Opção de cofre inválida.");
+            }
+
             if (conta.getCofres().get(indice).getSaldoCofre() < valorSaque ) {
-                return WithdrawResult.erro("Saldo insuficiente dentro do cofre!");
+                return OperationResult.erro("Saldo insuficiente dentro do cofre.");
+            }
+
+            if (valorSaque < 0) {
+                return OperationResult.erro("O valor do saque deve ser maior que zero.");
             }
 
 
         CofreBradesco cofreSelecionado = conta.getCofres().get(indice);
 
-        float novoSaldoApp = valorSaque + conta.getSaldoApp();
+
         float novoSaldoCofre = cofreSelecionado.getSaldoCofre() - valorSaque;
+        float novoSaldoApp = valorSaque + conta.getSaldoApp();
+
 
         conta.setSaldoApp(novoSaldoApp);
         cofreSelecionado.setSaldoCofre(novoSaldoCofre);
 
-        return WithdrawResult.sucesso(novoSaldoCofre, novoSaldoApp);
+        return OperationResult.sucesso("Saque realizado com sucesso! \n",novoSaldoCofre, novoSaldoApp);
     }
 }

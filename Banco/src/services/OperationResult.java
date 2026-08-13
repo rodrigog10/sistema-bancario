@@ -1,13 +1,13 @@
 package services;
 
-public class DepositResult {
+public class OperationResult {
     private boolean sucesso;
     private String mensagem;
     private float novoSaldoCofre;
     private float novoSaldoApp;
 
     // Construtor principal
-    public DepositResult(boolean sucesso, String mensagem, float novoSaldoCofre, float novoSaldoApp) {
+    public OperationResult(boolean sucesso, String mensagem, float novoSaldoCofre, float novoSaldoApp) {
         this.sucesso = sucesso;
         this.mensagem = mensagem;
         this.novoSaldoCofre = novoSaldoCofre;
@@ -16,13 +16,14 @@ public class DepositResult {
 
     // Método estático para ERROS: Recebe a mensagem dinâmica de acordo com a validação
 
-    public static DepositResult erro(String mensagem) {
-        return new DepositResult(false, mensagem, 0, 0);
+    public static OperationResult erro(String mensagem) {
+        return new OperationResult(false, mensagem, 0, 0);
     }
 
     // Método estático para SUCESSO: Usa a mensagem padrão de confirmação
-    public static DepositResult sucesso(float novoSaldoCofre, float novoSaldoApp) {
-        return new DepositResult(true, "Depósito realizado com sucesso!", novoSaldoCofre, novoSaldoApp);
+
+    public static OperationResult sucesso(String mensagem, float novoSaldoCofre, float novoSaldoApp) {
+        return new OperationResult(true, mensagem, novoSaldoCofre, novoSaldoApp);
     }
 
     // Getters para a View conseguir ler as informações
@@ -30,4 +31,5 @@ public class DepositResult {
     public String getMensagem() { return mensagem; }
     public float getNovoSaldoCofre() { return novoSaldoCofre; }
     public float getNovoSaldoApp() { return novoSaldoApp; }
+
 }

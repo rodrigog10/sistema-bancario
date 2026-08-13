@@ -1,5 +1,6 @@
 package view;
 
+import domain.Bradesco;
 import domain.Cliente;
 import domain.CofreBradesco;
 import services.*;
@@ -18,13 +19,16 @@ public class App {
 
         public void iniciar(Cliente cliente, List<Cliente> clientes, List<CofreBradesco> cofres) {
                 try {
+                        Bradesco conta = cliente.getConta();
                         boolean rodando = true;
                         while (rodando) {
                                 System.out.println("============================");
                                 System.out.println("BEM VINDO A AGÊNCIA DO BANCO");
                                 System.out.println("============================");
 
-                                System.out.println("   Menu  \n");
+                                System.out.println("   Menu  \n ");
+                                System.out.println("Seu saldo: R$" + conta.getSaldoApp() +"  \n");
+
                                 System.out.println("1 - Depositar");
                                 System.out.println("2 - Sacar");
                                 System.out.println("3 - Cofre");

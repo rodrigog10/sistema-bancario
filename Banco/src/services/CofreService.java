@@ -8,10 +8,15 @@ import java.util.Scanner;
 
 public class CofreService {
 
+
+
     Scanner input = new Scanner(System.in);
 
     public void cofre(Cliente cliente) {
         Bradesco conta = cliente.getConta();
+
+
+
 
         try {
             System.out.println("Selecione a opção que deseja utilizar: ");
