@@ -16,6 +16,7 @@ public class ExecutionApp {
         Cliente clienteLogado = null;
         boolean rodando = true;
 
+
         while (rodando) {
             login = false;
             while (!login) {

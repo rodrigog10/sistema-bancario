@@ -14,7 +14,7 @@ public class App {
         AccountInfoService info = new AccountInfoService();
         TransferService transfer = new TransferService();
         LoanService loan = new LoanService();
-        WithdrawService safes = new WithdrawService();
+        WithdrawView withdrawView = new WithdrawView();
 
         public void iniciar(Cliente cliente, List<Cliente> clientes, List<CofreBradesco> cofres) {
                 try {
@@ -41,7 +41,7 @@ public class App {
                                 if (opcao == 1) {
                                         depositView.exibirMenuDeposito(cliente);
                                 } else if (opcao == 2) {
-                                        safes.sacar(cliente);
+                                        withdrawView.exibirMenuSaque(cliente);
                                 } else if (opcao == 3) {
                                         draw.cofre(cliente);
                                 } else if (opcao == 4) {
