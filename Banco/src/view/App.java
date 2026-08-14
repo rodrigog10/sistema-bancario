@@ -12,6 +12,7 @@ public class App {
         Scanner input = new Scanner(System.in);
         DepositView depositView = new DepositView();
         CofreService draw = new CofreService();
+        CofreView cofreView = new CofreView();
         AccountInfoService info = new AccountInfoService();
         TransferService transfer = new TransferService();
         LoanService loan = new LoanService();
@@ -47,7 +48,7 @@ public class App {
                                 } else if (opcao == 2) {
                                         withdrawView.exibirMenuSaque(cliente);
                                 } else if (opcao == 3) {
-                                        draw.cofre(cliente);
+                                        cofreView.exibirMenuCofre(cliente);
                                 } else if (opcao == 4) {
                                         info.informacoes(cliente);
                                 } else if (opcao == 5) {
