@@ -28,7 +28,7 @@ public class AccountInfoService {
                     CofreBradesco c = conta.getCofres().get(i);
                     System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + " | Saldo: R$ " + c.getSaldoCofre());
                 }
-                System.out.println();
+
             }
 
             System.out.println("Pressione ENTER para voltar ao menu...");
