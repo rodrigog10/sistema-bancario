@@ -1,25 +1,51 @@
 package services;
 
-import domain.Bradesco;
 import domain.Cliente;
 import domain.CofreBradesco;
 
-
-
 public class CofreService {
 
-    public OperationResult alteraNomeCofre(Cliente cliente, CofreBradesco cofreSelecionado, int indice, String novoNome) {
-        if (novoNome.equals("")) {
-            return OperationResult.erro("O seu cofrinho precisa ter um nome. ");
+    public OperationResult alteraNomeCofre(CofreBradesco cofre, String novoNome) {
+
+        // para o nome:
+
+        if (novoNome == null || novoNome.trim().isEmpty()) {
+            return OperationResult.erro("O seu cofrinho precisa ter um nome.");
         } else {
-            return OperationResult.sucesso(null, 0, 0);
+            cofre.setNomeCofre(novoNome);
+            return OperationResult.sucessoNome("Nome do cofrinho alterado com sucesso para: " + cofre.getNomeCofre());
         }
+    }
+
+
+
+    // para o objetivo:
+
+    public OperationResult alterarObjetivo(CofreBradesco cofre, String novoObjetivo) {
+
+            if (novoObjetivo == null || novoObjetivo.trim().isEmpty()) {
+                return OperationResult.erro("O seu cofrinho deve ter um objetivo.");
+            }
+                cofre.setObjetivoCofre(novoObjetivo);
+                    return OperationResult.sucessoObjetivo("Seu objetivo foi alterado com sucesso! \n Novo objetivo: " + cofre.getObjetivoCofre());
 
     }
 
-    public OperationResult gerenciamentoCofre (Cliente cliente, CofreBradesco cofreSelecionado, int indiceSelecao) {
 
-        return null;
+
+
+    public OperationResult deletarCofre(Cliente cliente , CofreBradesco cofreSelecionado) {
+       if (cofreSelecionado == null) {
+           return OperationResult.erro("Cofrinho não encontrado.");
+
+       }
+
+           float saldoRetornado = cofreSelecionado.getSaldoCofre();
+           float novoSaldoApp = saldoRetornado + cliente.getConta().getSaldoApp();
+           cliente.getConta().setSaldoApp(novoSaldoApp);
+
+            cliente.getConta().getCofres().remove(cofreSelecionado);
+
+            return OperationResult.sucessoDeleteCofre("Cofrinho deletado com sucesso. \n Saldo retornado: " + saldoRetornado, novoSaldoApp);
     }
-
 }

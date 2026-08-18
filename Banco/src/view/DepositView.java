@@ -2,7 +2,6 @@ package view;
 
 import domain.Bradesco;
 import domain.Cliente;
-import domain.CofreBradesco;
 import services.OperationResult;
 import services.DepositService;
 
@@ -28,7 +27,7 @@ public class DepositView {
             System.out.println("\n=== Seus cofrinhos disponíveis: ===");
 
 
-                CofreViewUtils.exibirListaCofres(conta);
+                CofreNameUtils.exibirListaCofres(conta);
 
             System.out.print("\nSelecione o cofrinho: ");
             int opcaoCofre = input.nextInt();

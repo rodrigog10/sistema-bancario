@@ -33,15 +33,15 @@ public class DepositService {
 
         CofreBradesco cofreSelecionado = conta.getCofres().get(indice);
 
-        // Atualiza a conta principal
+        // atualiza a conta principal
         float novoValorApp = conta.getSaldoApp() - valorDeposito;
         conta.setSaldoApp(novoValorApp);
 
-        // Atualiza o cofre real
+        // atualiza o cofre real
         float novoSaldoCofre = cofreSelecionado.getSaldoCofre() + valorDeposito;
         cofreSelecionado.setSaldoCofre(novoSaldoCofre);
 
-        // Retorna o resultado com sucesso e os novos valores
+        // retorna o resultado e os novos valores caso a operação seja um sucesso.
         return OperationResult.sucesso("Depósito realizado com sucesso!",novoSaldoCofre, novoValorApp);
     }
 }

@@ -26,6 +26,18 @@ public class OperationResult {
         return new OperationResult(true, mensagem, novoSaldoCofre, novoSaldoApp);
     }
 
+    public static OperationResult sucessoNome(String mensagem) {
+        return new OperationResult(true, mensagem, 0, 0);
+    }
+
+    public static OperationResult sucessoObjetivo(String mensagem) {
+        return new OperationResult(true, mensagem, 0, 0);
+    }
+
+    public static OperationResult sucessoDeleteCofre(String mensagem, float novoSaldoApp) {
+        return new OperationResult(true, mensagem, 0, novoSaldoApp);
+    }
+
     // Getters para a View conseguir ler as informações
     public boolean isSucesso() { return sucesso; }
     public String getMensagem() { return mensagem; }

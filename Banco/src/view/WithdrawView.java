@@ -2,7 +2,6 @@ package view;
 
 import domain.Bradesco;
 import domain.Cliente;
-import domain.CofreBradesco;
 import services.OperationResult;
 import services.WithdrawService;
 
@@ -29,7 +28,7 @@ public class WithdrawView {
             System.out.println("Saldo disponível no App: R$ " + conta.getSaldoApp());
             System.out.println("\n=== Seus cofrinhos disponíveis: ===");
 
-            CofreViewUtils.exibirListaCofres(conta);
+            CofreNameUtils.exibirListaCofres(conta);
 
             System.out.println("Selecione o cofrinho que deseja sacar: ");
             int opcaoCofre = input.nextInt();
