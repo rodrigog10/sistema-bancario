@@ -17,9 +17,9 @@ public class CofreView {
         Scanner input = new Scanner(System.in);
         Bradesco conta = cliente.getConta();
 
-        System.out.println("=== MENU COFRE ===");
+        System.out.println("=== MENU COFRE === \n");
         try {
-            System.out.println("Selecione a opção que deseja utilizar:");
+            System.out.println("\nSelecione a opção que deseja utilizar: \n ");
             System.out.println("1 - Visualizar Cofrinhos");
             System.out.println("2 - Gerenciar Cofrinhos (Editar/Excluir)");
             System.out.println("3 - Criar novo Cofrinho");
@@ -117,7 +117,7 @@ public class CofreView {
             }
 
             if (opcaoMenu == 3) {
-                System.out.print("\nDigite o nome do seu novo cofrinho: ");
+                System.out.print("\nDigite o nome do seu novo cofrinho: \n");
                 String novoNomeCofrinho = input.nextLine();
 
                 if (novoNomeCofrinho == null || novoNomeCofrinho.trim().isEmpty()) {
@@ -125,7 +125,7 @@ public class CofreView {
                     return;
                 }
 
-                System.out.print("Digite o objetivo do seu cofrinho: ");
+                System.out.print("Digite o objetivo do seu cofrinho: \n");
                 String novoObjetivoCofrinho = input.nextLine();
 
                 if (novoObjetivoCofrinho == null || novoObjetivoCofrinho.trim().isEmpty()) {
@@ -133,8 +133,8 @@ public class CofreView {
                     return;
                 }
 
-                System.out.println("\nDeseja inserir valor no cofrinho?");
-                System.out.println("1 - Sim");
+                System.out.println("\nDeseja inserir valor no cofrinho? \n");
+                System.out.println("\n1 - Sim");
                 System.out.println("2 - Não");
                 System.out.print("> ");
 
