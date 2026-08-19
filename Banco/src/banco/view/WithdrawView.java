@@ -8,52 +8,52 @@ import banco.services.WithdrawService;
 import java.util.Scanner;
 
 public class WithdrawView {
-    Scanner input = new Scanner(System.in);
-    WithdrawService withdrawService = new WithdrawService();
+
+    private final Scanner input = new Scanner(System.in);
+    private final WithdrawService withdrawService = new WithdrawService();
 
     public void exibirMenuSaque(Cliente cliente) {
         try {
-            System.out.println("\n=== ÁREA DE SAQUE === \n");
+            System.out.println("=== ÁREA DE SAQUE ===");
             Bradesco conta = cliente.getConta();
 
-            if(conta.getCofres().isEmpty()){
+            if (conta.getCofres().isEmpty()) {
                 System.out.println("\nVocê não tem cofrinhos disponíveis.");
                 System.out.println("Pressione ENTER para voltar ao menu...");
                 input.nextLine();
                 return;
-                // Guard Clause da UI: não afeta as boas práticas porque cuida apenas da experiência do usuário, enquanto a regra de negócio continua protegida e validada no Service.
             }
 
             System.out.println("Saldo disponível no App: R$ " + conta.getSaldoApp());
-            System.out.println("\n=== Seus cofrinhos disponíveis: ===\n");
+            System.out.println("\n=== Seus cofrinhos disponíveis: ===");
 
             CofreGestaoView.exibirMenuGestaoCofre(cliente);
 
-            System.out.println("\nSelecione o cofrinho que deseja sacar: ");
+            System.out.print("\nSelecione o cofrinho que deseja sacar: ");
             int opcaoCofre = input.nextInt();
 
-            System.out.println("\nDigite o valor que deseja sacar: ");
+            System.out.print("Digite o valor que deseja sacar: R$ ");
             float valorSaque = input.nextFloat();
             input.nextLine();
 
             OperationResult resultado = withdrawService.sacar(cliente, opcaoCofre, valorSaque);
 
             if (resultado.isSucesso()) {
-                System.out.println(" \n " + resultado.getMensagem());
-
-                System.out.println("\nValor do saque efetuado: R$" + valorSaque+" \n");
-                System.out.println("\nNovo saldo do cofrinho: R$ " + resultado.getNovoSaldoCofre()+" \n");
+                System.out.println("\n" + resultado.getMensagem());
+                System.out.println("Valor do saque efetuado: R$ " + valorSaque);
+                System.out.println("Novo saldo do cofrinho: R$ " + resultado.getNovoSaldoCofre());
                 System.out.println("Saldo atual do aplicativo: R$ " + resultado.getNovoSaldoApp());
-                System.out.println("Aperte ENTER para voltar ao menu.");
+                System.out.println("\nPressione ENTER para voltar ao menu...");
                 input.nextLine();
-
             } else {
-                System.out.println(resultado.getMensagem());
+                System.out.println("\n" + resultado.getMensagem());
+                System.out.println("\nPressione ENTER para voltar ao menu...");
+                input.nextLine();
             }
 
-
         } catch (Exception e) {
-            System.out.println("Um erro inesperado aconteceu.");
+            System.out.println("\nUm erro inesperado aconteceu.");
+            System.out.println("Pressione ENTER para voltar ao menu...");
             input.nextLine();
         }
     }
