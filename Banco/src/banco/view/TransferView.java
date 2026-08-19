@@ -15,7 +15,7 @@ public class TransferView {
         Scanner input = new Scanner(System.in);
 
         try {
-            System.out.println("\n=== ÁREA DE TRANSFERÊNCIA (PIX) ===");
+            System.out.println("\n=== ÁREA DE TRANSFERÊNCIA (PIX) ===\n");
             System.out.print("Digite o E-mail ou CPF do destinatário: ");
             String chaveDestino = input.nextLine();
 
@@ -42,7 +42,7 @@ public class TransferView {
 
             if (resultado.isSucesso()) {
                 System.out.println("\n" + resultado.getMensagem());
-                System.out.println("Seu novo saldo: R$ " + resultado.getNovoSaldoApp());
+                System.out.println("\nSeu novo saldo: R$ " + resultado.getNovoSaldoApp());
             } else {
                 System.out.println("\n[ERRO]: " + resultado.getMensagem());
             }

@@ -70,7 +70,7 @@ public class App {
                         System.out.println("5 - Transferência (PIX)");
                         System.out.println("0 - Sair da Conta\n");
                         System.out.println("============================");
-                        System.out.print("Selecione a opção desejada: ");
+                        System.out.print("\nSelecione a opção desejada: ");
 
                         try {
                                 int opcao = input.nextInt();

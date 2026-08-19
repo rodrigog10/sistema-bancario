@@ -18,16 +18,15 @@ public class AccountInfoView {
             System.out.println("Idade: " + cliente.getIdade());
             System.out.println("Saldo no App: R$ " + conta.getSaldoApp() + "\n");
 
-            System.out.println("=== SEUS COFRINHOS ===");
+            System.out.println("\n=== SEUS COFRINHOS ===\n");
 
             if (conta.getCofres().isEmpty()) {
-                System.out.println("Você não possui nenhum cofrinho cadastrado.\n");
+                System.out.println("\nVocê não possui nenhum cofrinho cadastrado.\n");
             } else {
                 for (int i = 0; i < conta.getCofres().size(); i++) {
                     CofreBradesco c = conta.getCofres().get(i);
                     System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + " | Saldo: R$ " + c.getSaldoCofre());
                 }
-                System.out.println();
             }
 
             System.out.println("Pressione ENTER para voltar ao menu...");

@@ -9,7 +9,7 @@ public class CofreGestaoView {
         Bradesco conta = cliente.getConta();
         for (int i = 0; i < conta.getCofres().size(); i++) {
             CofreBradesco c = conta.getCofres().get(i);
-            System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + " | Objetivo: " + c.getObjetivoCofre() +" | Saldo: R$ " + c.getSaldoCofre());
+            System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + "\n - Objetivo: " + c.getObjetivoCofre() +"\n - Saldo: R$ " + c.getSaldoCofre());
         }
     }
 }

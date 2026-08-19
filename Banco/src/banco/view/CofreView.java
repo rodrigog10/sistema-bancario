@@ -17,13 +17,13 @@ public class CofreView {
 
         Scanner input = new Scanner(System.in);
         Bradesco conta = cliente.getConta();
-        System.out.println("=== MENU COFRE ===");
+        System.out.println("\n=== MENU COFRE ===\n");
         try {
-            System.out.println("Selecione a opção que deseja utilizar: ");
+            System.out.println("Selecione a opção que deseja utilizar: \n");
             System.out.println("1 - Visualizar Cofrinhos");
             System.out.println("2 - Gerenciar Cofrinhos (Editar/Excluir)");
             System.out.println("3 - Criar novo Cofrinho");
-            System.out.println("0 - Voltar");
+            System.out.println("0 - Voltar\n ");
             int opcaoMenu = input.nextInt();
             input.nextLine();
 
@@ -31,7 +31,7 @@ public class CofreView {
 
             if (opcaoMenu == 1) {
                 if (conta.getCofres().isEmpty()) {
-                    System.out.println("Você não tem cofrinhos registrados.");
+                    System.out.println("\nVocê não tem cofrinhos registrados.");
                     System.out.println("Pressione ENTER para voltar ao menu...");
                     input.nextLine();
                     return;
@@ -45,13 +45,13 @@ public class CofreView {
 
             if (opcaoMenu == 2) {
                 if (conta.getCofres().isEmpty()) {
-                    System.out.println("Você não tem cofrinhos registrados.");
+                    System.out.println("\nVocê não tem cofrinhos registrados.");
                     System.out.println("Pressione ENTER para voltar ao menu...");
                     input.nextLine();
                     return;
                 }
 
-                System.out.println("\n=== SEUS COFRINHOS ===");
+                System.out.println("\n=== SEUS COFRINHOS ===\n");
                 CofreGestaoView.exibirMenuGestaoCofre(cliente);
 
                 System.out.println("\nSelecione o cofrinho que deseja gerenciar: ");
@@ -66,7 +66,7 @@ public class CofreView {
                     // seleciona o cofre com base na posição.
                     CofreBradesco cofreSelecionado = conta.getCofres().get(indice);
 
-                    System.out.println("\nGerenciando o cofrinho '" + cofreSelecionado.getNomeCofre() + "':");
+                    System.out.println("\nGerenciando o cofrinho '" + cofreSelecionado.getNomeCofre() + "': \n");
                     System.out.println("1 - Alterar Nome");
                     System.out.println("2 - Alterar Objetivo");
                     System.out.println("3 - Excluir Cofrinho");
@@ -76,7 +76,7 @@ public class CofreView {
                     input.nextLine();
 
                     if (opcaoGerenciamento == 1) {
-                        System.out.println("Digite o novo nome do cofre: ");
+                        System.out.println("\nDigite o novo nome do cofre: ");
                         String novoNome = input.nextLine();
 
                         OperationResult resultadoNome = cofreService.alteraNomeCofre(cofreSelecionado, novoNome);
@@ -90,7 +90,7 @@ public class CofreView {
 
                     if (opcaoGerenciamento == 2) {
 
-                        System.out.println("Digite o nome do novo objetivo: ");
+                        System.out.println("\nDigite o nome do novo objetivo: ");
                         String novoObjetivo = input.nextLine();
                         OperationResult resultadoObjetivo = cofreService.alterarObjetivo(cofreSelecionado, novoObjetivo);
 
@@ -102,8 +102,8 @@ public class CofreView {
                     }
 
                     if (opcaoGerenciamento == 3) {
-                        System.out.println("Tem certeza que deseja excluir o cofrinho? \n Seu saldo irá retornar para o saldo do aplicativo.");
-                        System.out.println("1 - Confirmar \n 2 - Voltar");
+                        System.out.println("\nTem certeza que deseja excluir o cofrinho? \n Seu saldo irá retornar para o saldo do aplicativo.");
+                        System.out.println("\n 1 - Confirmar \n 2 - Voltar");
                         int opcaoDeletar = input.nextInt();
                         input.nextLine();
 
@@ -112,7 +112,7 @@ public class CofreView {
 
                             if (resultadoDelete.isSucesso()) {
                                 System.out.println("\n " + resultadoDelete.getMensagem());
-                                System.out.println(" Saldo atual da conta: R$ " + resultadoDelete.getNovoSaldoApp());
+                                System.out.println(" \nSaldo atual da conta: R$ " + resultadoDelete.getNovoSaldoApp());
                             } else {
                                 System.out.println("\n Erro ao excluir: " + resultadoDelete.getMensagem());
                             }
@@ -120,7 +120,7 @@ public class CofreView {
                     }
 
                 } else {
-                    System.out.println("Opção de cofrinho inválida!");
+                    System.out.println("\nOpção de cofrinho inválida!");
                 }
             }
 
@@ -130,7 +130,7 @@ public class CofreView {
 
             if (opcaoMenu == 3) {
 
-                System.out.println("Digite o nome do seu novo cofrinho: ");
+                System.out.println("\nDigite o nome do seu novo cofrinho: ");
                 String novoNomeCofrinho = input.nextLine();
 
                 if (novoNomeCofrinho == null || novoNomeCofrinho.trim().isEmpty()) {
@@ -138,7 +138,7 @@ public class CofreView {
                     return;
                 }
 
-                System.out.println("Digite o objetivo do seu cofrinho: ");
+                System.out.println("\nDigite o objetivo do seu cofrinho: ");
                 String novoObjetivoCofrinho = input.nextLine();
 
                 if (novoObjetivoCofrinho == null || novoObjetivoCofrinho.trim().isEmpty()) {
@@ -153,7 +153,7 @@ public class CofreView {
                 input.nextLine();
 
                 if (opcaoInserir == 1) {
-                    System.out.println("Digite o valor a ser inserido: ");
+                    System.out.println("\nDigite o valor a ser inserido: ");
                     float valorDeposito = input.nextFloat();
                     input.nextLine();
 

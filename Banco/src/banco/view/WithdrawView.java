@@ -13,11 +13,11 @@ public class WithdrawView {
 
     public void exibirMenuSaque(Cliente cliente) {
         try {
-            System.out.println("\n=== ÁREA DE SAQUE ===");
+            System.out.println("\n=== ÁREA DE SAQUE === \n");
             Bradesco conta = cliente.getConta();
 
             if(conta.getCofres().isEmpty()){
-                System.out.println("Você não tem cofrinhos disponíveis.");
+                System.out.println("\nVocê não tem cofrinhos disponíveis.");
                 System.out.println("Pressione ENTER para voltar ao menu...");
                 input.nextLine();
                 return;
@@ -25,14 +25,14 @@ public class WithdrawView {
             }
 
             System.out.println("Saldo disponível no App: R$ " + conta.getSaldoApp());
-            System.out.println("\n=== Seus cofrinhos disponíveis: ===");
+            System.out.println("\n=== Seus cofrinhos disponíveis: ===\n");
 
             CofreGestaoView.exibirMenuGestaoCofre(cliente);
 
-            System.out.println("Selecione o cofrinho que deseja sacar: ");
+            System.out.println("\nSelecione o cofrinho que deseja sacar: ");
             int opcaoCofre = input.nextInt();
 
-            System.out.println("Digite o valor que deseja sacar: ");
+            System.out.println("\nDigite o valor que deseja sacar: ");
             float valorSaque = input.nextFloat();
             input.nextLine();
 
@@ -41,8 +41,8 @@ public class WithdrawView {
             if (resultado.isSucesso()) {
                 System.out.println(" \n " + resultado.getMensagem());
 
-                System.out.println("Valor do saque efetuado: R$" + valorSaque+" \n");
-                System.out.println("Novo saldo do cofrinho: R$ " + resultado.getNovoSaldoCofre()+" \n");
+                System.out.println("\nValor do saque efetuado: R$" + valorSaque+" \n");
+                System.out.println("\nNovo saldo do cofrinho: R$ " + resultado.getNovoSaldoCofre()+" \n");
                 System.out.println("Saldo atual do aplicativo: R$ " + resultado.getNovoSaldoApp());
                 System.out.println("Aperte ENTER para voltar ao menu.");
                 input.nextLine();
