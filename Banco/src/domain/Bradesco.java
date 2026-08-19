@@ -26,17 +26,6 @@ public class Bradesco {
         this.saldoApp = saldoApp;
     }
 
-    public void setLimiteEmprestimo(float limiteEmprestimo) {
-        this.limiteEmprestimo = limiteEmprestimo;
-    }
-
-    public float getLimiteEmprestimo() {
-        return limiteEmprestimo;
-    }
-
-    public void setCofres(List<CofreBradesco> cofres) {
-        this.cofres = cofres;
-    }
     public List<CofreBradesco> getCofres() {
         return cofres;
     }

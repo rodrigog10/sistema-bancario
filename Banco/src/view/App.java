@@ -11,11 +11,9 @@ import java.util.Scanner;
 public class App {
         Scanner input = new Scanner(System.in);
         DepositView depositView = new DepositView();
-        CofreService draw = new CofreService();
+        AccountInfoView accountInfoView = new AccountInfoView();
         CofreView cofreView = new CofreView();
-        AccountInfoService info = new AccountInfoService();
-        TransferService transfer = new TransferService();
-        LoanService loan = new LoanService();
+        TransferView transferView = new TransferView();
         WithdrawView withdrawView = new WithdrawView();
 
         public void iniciar(Cliente cliente, List<Cliente> clientes, List<CofreBradesco> cofres) {
@@ -35,7 +33,6 @@ public class App {
                                 System.out.println("3 - Cofre");
                                 System.out.println("4 - Consultar Saldo e Perfil");
                                 System.out.println("5 - Transferência (PIX)");
-                                System.out.println("6 - Solicitar Empréstimo");
                                 System.out.println("0 - Sair do Sistema\n ");
                                 System.out.println("============================");
 
@@ -50,11 +47,9 @@ public class App {
                                 } else if (opcao == 3) {
                                         cofreView.exibirMenuCofre(cliente);
                                 } else if (opcao == 4) {
-                                        info.informacoes(cliente);
+                                        accountInfoView.exibirMenuInfo(cliente);
                                 } else if (opcao == 5) {
-                                        transfer.transferir(cliente, clientes);
-                                } else if (opcao == 6) {
-                                        loan.emprestimo(cliente);
+                                        transferView.exibirMenuTransfer(cliente, clientes);
                                 } else if (opcao == 0) {
                                         System.out.println("Saindo do banco.. Até logo!");
                                         rodando = false;

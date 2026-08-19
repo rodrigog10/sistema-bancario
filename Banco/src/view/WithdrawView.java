@@ -28,13 +28,14 @@ public class WithdrawView {
             System.out.println("Saldo disponível no App: R$ " + conta.getSaldoApp());
             System.out.println("\n=== Seus cofrinhos disponíveis: ===");
 
-            CofreNameUtils.exibirListaCofres(conta);
+            CofreGestaoView.exibirMenuGestaoCofre(cliente);
 
             System.out.println("Selecione o cofrinho que deseja sacar: ");
             int opcaoCofre = input.nextInt();
 
             System.out.println("Digite o valor que deseja sacar: ");
             float valorSaque = input.nextFloat();
+            input.nextLine();
 
             OperationResult resultado = withdrawService.sacar(cliente, opcaoCofre, valorSaque);
 
@@ -54,6 +55,7 @@ public class WithdrawView {
 
         } catch (Exception e) {
             System.out.println("Um erro inesperado aconteceu.");
+            input.nextLine();
         }
     }
 }

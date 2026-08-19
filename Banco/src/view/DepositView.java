@@ -27,7 +27,7 @@ public class DepositView {
             System.out.println("\n=== Seus cofrinhos disponíveis: ===");
 
 
-                CofreNameUtils.exibirListaCofres(conta);
+            CofreGestaoView.exibirMenuGestaoCofre(cliente);
 
             System.out.print("\nSelecione o cofrinho: ");
             int opcaoCofre = input.nextInt();
@@ -42,12 +42,12 @@ public class DepositView {
 
             // Apresenta a resposta da operação ao usuário
             if (resultado.isSucesso()) {
-                System.out.println(" \n " + resultado.getMensagem());
+                System.out.println(" \n " + resultado.getMensagem() +" \n");
 
-                System.out.println("Valor do depósito efetuado: R$" + valorDeposito +" \n");
+                System.out.println("Valor do depósito efetuado: R$" + valorDeposito);
                 System.out.println("Novo saldo do cofrinho: R$ " + resultado.getNovoSaldoCofre()+" \n");
-                System.out.println("Saldo atual do aplicativo: R$ " + resultado.getNovoSaldoApp());
-                System.out.println("Aperte ENTER para voltar ao menu.");
+                System.out.println("Saldo atual do aplicativo: R$ " + resultado.getNovoSaldoApp()+" \n");
+                System.out.println("Pressione ENTER para voltar ao menu.");
                 input.nextLine();
 
             } else {
@@ -59,7 +59,5 @@ public class DepositView {
             input.nextLine();
         }
 
-        System.out.println("\nPressione ENTER para voltar ao menu...");
-        input.nextLine();
     }
 }

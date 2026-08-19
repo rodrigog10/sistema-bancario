@@ -1,4 +1,4 @@
-package services;
+package view;
 
 import domain.Bradesco;
 import domain.Cliente;
@@ -6,14 +6,13 @@ import domain.CofreBradesco;
 
 import java.util.Scanner;
 
-public class AccountInfoService {
+public class AccountInfoView {
 
-    public void informacoes(Cliente cliente) {
+    public void exibirMenuInfo(Cliente cliente) {
         Bradesco conta = cliente.getConta();
+        Scanner input = new Scanner(System.in);
 
         try {
-            Scanner input = new Scanner(System.in);
-
             System.out.println("=== INFORMAÇÕES DA CONTA ===");
             System.out.println("Nome: " + cliente.getNome());
             System.out.println("Idade: " + cliente.getIdade());
@@ -28,7 +27,7 @@ public class AccountInfoService {
                     CofreBradesco c = conta.getCofres().get(i);
                     System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + " | Saldo: R$ " + c.getSaldoCofre());
                 }
-
+                System.out.println();
             }
 
             System.out.println("Pressione ENTER para voltar ao menu...");
@@ -36,6 +35,7 @@ public class AccountInfoService {
 
         } catch (Exception e) {
             System.out.println("Um erro inesperado aconteceu, tente novamente.");
+            input.nextLine();
         }
     }
 }

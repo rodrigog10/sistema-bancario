@@ -9,23 +9,21 @@ public class DepositService {
     public OperationResult depositar(Cliente cliente, int opcaoCofre, float valorDeposito) {
         Bradesco conta = cliente.getConta();
 
-        // 1. Validação: A conta tem cofres?
+
+        if (valorDeposito <= 0) {
+            return OperationResult.erro("O valor do depósito deve ser maior que zero.");
+        }
         if (conta.getCofres().isEmpty()) {
             return OperationResult.erro("Você não tem cofrinhos registrados.");
         }
 
-        // 2. Validação: A opção selecionada é válida no array?
+
         int indice = opcaoCofre - 1;
         if (indice < 0 || indice >= conta.getCofres().size()) {
             return OperationResult.erro("Opção inválida!");
         }
 
-        // 3. Validação: O valor digitado é maior que zero?
-        if (valorDeposito <= 0) {
-            return OperationResult.erro("O valor do depósito deve ser maior que zero!");
-        }
 
-        // 4. Validação: O saldo no aplicativo é suficiente?
         if (conta.getSaldoApp() < valorDeposito) {
             return OperationResult.erro("Saldo insuficiente!");
         }
