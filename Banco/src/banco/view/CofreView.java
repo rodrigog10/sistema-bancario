@@ -1,21 +1,30 @@
 package banco.view;
 
+
+import banco.dao.CofreDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 import banco.services.CofreService;
 import banco.services.OperationResult;
 
+
+import java.util.List;
 import java.util.Scanner;
 
 public class CofreView {
 
     private final CofreService cofreService = new CofreService();
+    private final CofreDAO cofreDAO = new CofreDAO();
+
+
+
 
     public void exibirMenuCofre(Cliente cliente) {
 
         Scanner input = new Scanner(System.in);
         Bradesco conta = cliente.getConta();
+
 
         System.out.println("=== MENU COFRE === \n");
         try {
@@ -28,23 +37,24 @@ public class CofreView {
 
             int opcaoMenu = input.nextInt();
             input.nextLine();
+            List<CofreBradesco> cofres = cofreDAO.buscarCofres(conta.getId());
 
             if (opcaoMenu == 1) {
-                if (conta.getCofres().isEmpty()) {
+                if (cofres.isEmpty()) {
                     System.out.println("\nVocê não tem cofrinhos registrados.");
                     System.out.println("Pressione ENTER para voltar ao menu...");
                     input.nextLine();
                     return;
                 } else {
-                    System.out.println();
-                    CofreGestaoView.exibirMenuGestaoCofre(cliente);
+                    CofreGestaoView.exibirMenuGestaoCofre(cofres);
                     System.out.println("\nPressione ENTER para voltar...");
                     input.nextLine();
                 }
             }
 
             if (opcaoMenu == 2) {
-                if (conta.getCofres().isEmpty()) {
+
+                if (cofres.isEmpty()) {
                     System.out.println("\nVocê não tem cofrinhos registrados.");
                     System.out.println("Pressione ENTER para voltar ao menu...");
                     input.nextLine();
@@ -52,8 +62,7 @@ public class CofreView {
                 }
 
                 System.out.println("\n === SEUS COFRINHOS === \n");
-                CofreGestaoView.exibirMenuGestaoCofre(cliente);
-
+                CofreGestaoView.exibirMenuGestaoCofre(cofres);
                 System.out.println("Selecione o cofrinho que deseja gerenciar:");
                 System.out.print("> ");
                 int opcaoCofre = input.nextInt();
@@ -61,8 +70,8 @@ public class CofreView {
 
                 int indice = opcaoCofre - 1;
 
-                if (indice >= 0 && indice < conta.getCofres().size()) {
-                    CofreBradesco cofreSelecionado = conta.getCofres().get(indice);
+                if (indice >= 0 && indice < cofres.size()) {
+                    CofreBradesco cofreSelecionado = cofres.get(indice);
 
                     System.out.println("\nGerenciando o cofrinho '" + cofreSelecionado.getNomeCofre() + "':");
                     System.out.println("1 - Alterar Nome");
@@ -78,7 +87,7 @@ public class CofreView {
                         System.out.print("\nDigite o novo nome do cofre: ");
                         String novoNome = input.nextLine();
 
-                        OperationResult resultadoNome = cofreService.alteraNomeCofre(cofreSelecionado, novoNome);
+                        OperationResult resultadoNome = cofreService.alteraNomeCofre(novoNome, cofreSelecionado);
                         System.out.println(resultadoNome.getMensagem());
                     }
 

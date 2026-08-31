@@ -12,6 +12,7 @@ public class DataBaseConnection {
     private static final String SENHA = "leite123"; // A sua senha do banco
 
     // Método que a ClienteDAO vai chamar para abrir a ponte
+
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USUARIO, SENHA);
     }

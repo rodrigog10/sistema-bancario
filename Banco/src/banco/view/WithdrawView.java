@@ -1,18 +1,23 @@
 package banco.view;
 
+import banco.dao.CofreDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
+import banco.domain.CofreBradesco;
 import banco.services.OperationResult;
 import banco.services.WithdrawService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class WithdrawView {
-
+    Bradesco conta = new Bradesco();
+    private final CofreDAO cofreDAO = new CofreDAO();
     private final Scanner input = new Scanner(System.in);
     private final WithdrawService withdrawService = new WithdrawService();
 
     public void exibirMenuSaque(Cliente cliente) {
+        List<CofreBradesco> cofres = cofreDAO.buscarCofres(conta.getId());
         try {
             System.out.println("=== ÁREA DE SAQUE ===");
             Bradesco conta = cliente.getConta();
@@ -27,7 +32,7 @@ public class WithdrawView {
             System.out.println("Saldo disponível no App: R$ " + conta.getSaldoApp());
             System.out.println("\n=== Seus cofrinhos disponíveis: ===");
 
-            CofreGestaoView.exibirMenuGestaoCofre(cliente);
+            CofreGestaoView.exibirMenuGestaoCofre(cofres);
 
             System.out.print("\nSelecione o cofrinho que deseja sacar: ");
             int opcaoCofre = input.nextInt();

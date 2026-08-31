@@ -1,23 +1,27 @@
 package banco.view;
 
+import banco.dao.CofreDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
+import banco.domain.CofreBradesco;
 import banco.services.OperationResult;
 import banco.services.DepositService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class DepositView {
 
     private final Scanner input = new Scanner(System.in);
     private final DepositService depositService = new DepositService();
+    private final CofreDAO cofreDAO = new CofreDAO();
 
     public void exibirMenuDeposito(Cliente cliente) {
         try {
             System.out.println("=== ÁREA DE DEPÓSITO ===");
 
             Bradesco conta = cliente.getConta();
-
+            List<CofreBradesco> cofres = cofreDAO.buscarCofres(conta.getId());
             if (conta.getCofres().isEmpty()) {
                 System.out.println("\nVocê não tem cofrinhos disponíveis.");
                 System.out.println("Pressione ENTER para voltar ao menu...");
@@ -28,7 +32,7 @@ public class DepositView {
             System.out.println("Saldo disponível no App: R$ " + conta.getSaldoApp());
             System.out.println("\n=== Seus cofrinhos disponíveis: ===");
 
-            CofreGestaoView.exibirMenuGestaoCofre(cliente);
+            CofreGestaoView.exibirMenuGestaoCofre(cofres);
 
             System.out.print("\nSelecione o cofrinho: ");
             int opcaoCofre = input.nextInt();

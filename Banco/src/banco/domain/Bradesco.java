@@ -6,6 +6,7 @@ import java.util.List;
 public class Bradesco {
     private float saldoApp;
     private List<CofreBradesco> cofres = new ArrayList<>();
+    private int id;
 
     public Bradesco() {
     }
@@ -15,7 +16,13 @@ public class Bradesco {
         this.cofres = cofres;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public int getId() {
+        return this.id;
+    }
     public float getSaldoApp() {
         return saldoApp;
     }

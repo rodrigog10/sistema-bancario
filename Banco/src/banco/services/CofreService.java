@@ -1,27 +1,37 @@
 package banco.services;
 
+import banco.dao.CofreDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 
+
+
 public class CofreService {
 
-    public OperationResult alteraNomeCofre(CofreBradesco cofre, String novoNome) {
+    CofreDAO cofreDAO = new CofreDAO();
+
+    public OperationResult alteraNomeCofre(String novoNome, CofreBradesco cofreSelecionado) {
         if (novoNome == null || novoNome.trim().isEmpty()) {
             return OperationResult.erro("O seu cofrinho precisa ter um nome.");
         }
 
-        cofre.setNomeCofre(novoNome);
-        return OperationResult.sucesso("Nome do cofrinho alterado com sucesso para: " + cofre.getNomeCofre());
+
+        cofreDAO.atualizarNomeCofre(novoNome, cofreSelecionado.getId());
+        cofreSelecionado.setNomeCofre(novoNome);
+
+        return OperationResult.sucesso("Nome do cofrinho alterado com sucesso para: " + cofreSelecionado.getNomeCofre());
     }
 
-    public OperationResult alterarObjetivo(CofreBradesco cofre, String novoObjetivo) {
+    public OperationResult alterarObjetivo(CofreBradesco cofreSelecionado, String novoObjetivo) {
         if (novoObjetivo == null || novoObjetivo.trim().isEmpty()) {
             return OperationResult.erro("O seu cofrinho deve ter um objetivo.");
         }
 
-        cofre.setObjetivoCofre(novoObjetivo);
-        return OperationResult.sucesso("Seu objetivo foi alterado com sucesso! \n Novo objetivo: " + cofre.getObjetivoCofre());
+        //cofreDAO.atualizarObjetivoCofre(cofre.getId(), novoObjetivo);
+        //cofre.setObjetivoCofre(novoObjetivo);
+
+        return OperationResult.sucesso("Seu objetivo foi alterado com sucesso! \n Novo objetivo: " + cofreSelecionado.getObjetivoCofre());
     }
 
     public OperationResult deletarCofre(Cliente cliente, CofreBradesco cofreSelecionado) {
