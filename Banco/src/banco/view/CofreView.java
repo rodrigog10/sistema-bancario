@@ -18,12 +18,12 @@ public class CofreView {
     private final CofreDAO cofreDAO = new CofreDAO();
 
 
-
-
     public void exibirMenuCofre(Cliente cliente) {
 
         Scanner input = new Scanner(System.in);
         Bradesco conta = cliente.getConta();
+        int contaId = conta.getId(); // do Bradesco
+        float saldoApp = conta.getSaldoApp();
 
 
         System.out.println("=== MENU COFRE === \n");
@@ -126,6 +126,7 @@ public class CofreView {
             }
 
             if (opcaoMenu == 3) {
+
                 System.out.print("\nDigite o nome do seu novo cofrinho: \n");
                 String novoNomeCofrinho = input.nextLine();
 
@@ -155,7 +156,9 @@ public class CofreView {
                     float valorDeposito = input.nextFloat();
                     input.nextLine();
 
-                    OperationResult resultado = cofreService.optionYes(cliente, novoNomeCofrinho, novoObjetivoCofrinho, valorDeposito);
+
+
+                    OperationResult resultado = cofreService.optionYes(conta, contaId, saldoApp, novoNomeCofrinho, novoObjetivoCofrinho, valorDeposito);
 
                     if (resultado.isSucesso()) {
                         System.out.println("\n" + resultado.getMensagem());
@@ -169,7 +172,7 @@ public class CofreView {
                     }
 
                 } else {
-                    OperationResult resultado = cofreService.optionNo(cliente, novoNomeCofrinho, novoObjetivoCofrinho);
+                    OperationResult resultado = cofreService.optionNo(conta, contaId, novoNomeCofrinho, novoObjetivoCofrinho);
 
                     if (resultado.isSucesso()) {
                         System.out.println("\n" + resultado.getMensagem());

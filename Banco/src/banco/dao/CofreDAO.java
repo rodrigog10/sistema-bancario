@@ -20,15 +20,14 @@ public class CofreDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                // Nomes das colunas exatamente iguais aos do seu PostgreSQL:
                 int idCofre = rs.getInt("id");
+                int idContaBanco = rs.getInt("conta_id");
                 String nome = rs.getString("nome_cofre");
                 String objetivo = rs.getString("objetivo_cofre");
                 float saldo = rs.getFloat("saldo_cofre");
 
-                // Instancia o cofre e adiciona na lista
 
-                CofreBradesco cofre = new CofreBradesco(idCofre, nome, objetivo, saldo);
+                CofreBradesco cofre = new CofreBradesco(idCofre, idContaBanco, nome, objetivo, saldo);
                 cofres.add(cofre);
             }
 
@@ -39,23 +38,33 @@ public class CofreDAO {
         return cofres;
     }
 
-    public List<CofreBradesco> criarCofres() {
-        List<CofreBradesco> cofres = new ArrayList<>();
-        String sql = "INSERT INTO cofre_bradesco (nome_cofre, objetivo_cofre, saldo_cofre) VALUES (?, ?, ?)";
-        try {
-            Connection connect = DataBaseConnection.getConnection();
 
-            PreparedStatement ps = connect.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
 
-            //Continuar..
 
+
+    public boolean criarCofreComSaldo(CofreBradesco novoCofre) {
+        String sql = "INSERT INTO cofre_bradesco (conta_id, nome_cofre, objetivo_cofre, saldo_cofre) VALUES (?, ?, ?, ?)";
+
+        try (Connection connect = DataBaseConnection.getConnection();
+             PreparedStatement ps = connect.prepareStatement(sql)) {
+
+            ps.setInt(1, novoCofre.getContaId());
+            ps.setString(2, novoCofre.getNomeCofre());
+            ps.setString(3, novoCofre.getObjetivoCofre());
+            ps.setFloat(4, novoCofre.getSaldoCofre());
+
+            ps.executeUpdate();
+            return true;
 
         } catch (Exception e) {
-            System.out.println("Erro." + e.getMessage());
+            System.out.println("Erro ao criar cofre: " + e.getMessage());
+            return false; // Falha: aconteceu algum erro no banco
         }
-        return cofres;
     }
+
+
+
+
 
     public void atualizarNomeCofre(String novoNome, int idCofre) {
 
@@ -74,8 +83,17 @@ public class CofreDAO {
     }
 
     public void atualizarObjetivoCofre(String novoObjetivo, int idCofre) {
+        String sql = "UPDATE cofre_bradesco SET objetivo_cofre = ? WHERE id = ?";
 
-
+            try(Connection connect = DataBaseConnection.getConnection();
+            PreparedStatement ps = connect.prepareStatement(sql))
+            {
+                ps.setString(1, novoObjetivo);
+                ps.setInt(2, idCofre);
+                ps.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("Erro ao atualizar o nome do cofre: " + e.getMessage());
+            }
     }
 
 

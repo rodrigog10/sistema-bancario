@@ -16,10 +16,10 @@ public class App {
                 boolean rodando = true;
 
                 while (rodando) {
-                        Cliente usuarioEncontrado = realizarLogin();
+                        Cliente usuarioLogado = realizarLogin();
 
-                        if (usuarioEncontrado != null) {
-                                menuApp.exibirMenuPrincipal(usuarioEncontrado);
+                        if (usuarioLogado != null) {
+                                menuApp.exibirMenuPrincipal(usuarioLogado);
                         }
                 }
         }

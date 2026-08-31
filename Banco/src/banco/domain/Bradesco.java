@@ -8,6 +8,7 @@ public class Bradesco {
     private List<CofreBradesco> cofres = new ArrayList<>();
     private int id;
 
+
     public Bradesco() {
     }
 
@@ -15,6 +16,8 @@ public class Bradesco {
         this.saldoApp = saldoApp;
         this.cofres = cofres;
     }
+
+
 
     public void setId(int id) {
         this.id = id;

@@ -1,8 +1,7 @@
 package banco.domain;
 
-
-
 public class Cliente {
+    private int id;
     private String nome;
     private int idade;
     private String cpf;
@@ -10,13 +9,23 @@ public class Cliente {
     private int senha;
     private Bradesco conta;
 
-    public Cliente(String nome, int idade, String cpf, String email, int senha, Bradesco conta ) {
+
+    public Cliente(int id, String nome, int idade, String cpf, String email, int senha, Bradesco conta) {
+        this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
         this.conta = conta;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -50,6 +59,4 @@ public class Cliente {
     public Bradesco getConta() {
         return conta;
     }
-
-
 }

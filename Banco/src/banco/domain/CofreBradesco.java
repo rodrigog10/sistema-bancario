@@ -1,33 +1,41 @@
 package banco.domain;
 
 public class CofreBradesco {
-    private int id; // Novo atributo para guardar o ID do banco
+    private int id;
+    private int contaId;
     private String nomeCofre;
     private String objetivoCofre;
     private float saldoCofre;
 
-    // Construtor usado quando você busca do banco (já tem ID)
-    public CofreBradesco(int id, String nomeCofre, String objetivoCofre, float saldoCofre) {
+    // 1. Construtor usado quando você busca do banco (vem id, contaId, nome, objetivo, saldo)
+    public CofreBradesco(int id, int contaId, String nomeCofre, String objetivoCofre, float saldoCofre) {
         this.id = id;
+        this.contaId = contaId;
         this.nomeCofre = nomeCofre;
         this.objetivoCofre = objetivoCofre;
         this.saldoCofre = saldoCofre;
     }
 
-    // Construtor usado quando o usuário cria um cofre novo na tela (ainda não tem ID no banco)
-    public CofreBradesco(String nomeCofre, String objetivoCofre, float saldoCofre) {
+    // 2. Construtor usado quando o usuário cria um cofre novo na tela (ainda não tem ID do banco)
+    public CofreBradesco(int contaId, String nomeCofre, String objetivoCofre, float saldoCofre) {
+        this.contaId = contaId;
         this.nomeCofre = nomeCofre;
         this.objetivoCofre = objetivoCofre;
         this.saldoCofre = saldoCofre;
     }
 
-    // Getter e Setter para o ID
+    // Getters e Setters
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getContaId() {
+        return contaId;
     }
 
     public String getNomeCofre() {

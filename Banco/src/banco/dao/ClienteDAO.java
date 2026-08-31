@@ -27,21 +27,22 @@ public class ClienteDAO {
 
             try (ResultSet rs = command.executeQuery()) {
                 if (rs.next()) {
+                    int idCliente = rs.getInt("id");             // ID da tabela 'cliente'
                     String nome = rs.getString("nome");
                     int idade = rs.getInt("idade");
                     String cpf = rs.getString("cpf");
                     String emailBanco = rs.getString("email");
                     int senhaBanco = rs.getInt("senha");
-                    float saldo = rs.getFloat("saldo_app");
-                    int id =  rs.getInt("conta_id");
-                    // Pega o saldo retornado da tabela conta_bradesco no banco
 
+                    float saldo = rs.getFloat("saldo_app");
+                    int idConta = rs.getInt("conta_id");         // ID da tabela 'conta_bradesco'
 
                     Bradesco conta = new Bradesco();
-                    conta.setId(id);
-                    conta.setSaldoApp(saldo); //
+                    conta.setId(idConta);
+                    conta.setSaldoApp(saldo);
 
-                    return new Cliente(nome, idade, cpf, emailBanco, senhaBanco, conta);
+
+                    return new Cliente(idCliente, nome, idade, cpf, emailBanco, senhaBanco, conta);
                 }
             }
 
