@@ -1,6 +1,7 @@
 package banco.services;
 
 import banco.dao.CofreDAO;
+import banco.dao.ContaBradescoDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
@@ -10,6 +11,7 @@ import banco.domain.CofreBradesco;
 public class CofreService {
 
     CofreDAO cofreDAO = new CofreDAO();
+    ContaBradescoDAO contaBradescoDAO = new ContaBradescoDAO();
 
     public OperationResult alteraNomeCofre(String novoNome, CofreBradesco cofreSelecionado) {
         if (novoNome == null || novoNome.trim().isEmpty()) {
@@ -20,6 +22,10 @@ public class CofreService {
 
         return OperationResult.sucesso("Nome do cofrinho alterado com sucesso para: " + cofreSelecionado.getNomeCofre());
     }
+
+
+
+
 
     public OperationResult alterarObjetivo(CofreBradesco cofreSelecionado, String novoObjetivo) {
         if (novoObjetivo == null || novoObjetivo.trim().isEmpty()) {
@@ -32,20 +38,31 @@ public class CofreService {
         return OperationResult.sucesso("Seu objetivo foi alterado com sucesso! \n Novo objetivo: " + cofreSelecionado.getObjetivoCofre());
     }
 
-    public OperationResult deletarCofre(Cliente cliente, CofreBradesco cofreSelecionado) {
-        if (cofreSelecionado == null) {
+
+
+
+
+    public OperationResult deletarCofre(CofreBradesco cofreSelecionado, Cliente cliente) {
+        if (cofreSelecionado == null || cofreSelecionado.getId() == 0) {
             return OperationResult.erro("Cofrinho não encontrado.");
         }
 
-        float saldoRetornado = cofreSelecionado.getSaldoCofre();
-        float novoSaldoApp = saldoRetornado + cliente.getConta().getSaldoApp();
+        int cofreId = cofreSelecionado.getId();
+        int contaId = cliente.getConta().getId();
 
+        float saldoRetornado = cofreSelecionado.getSaldoCofre();
+        float novoSaldoApp = cliente.getConta().getSaldoApp() + saldoRetornado;
+
+        //atualiza no banco
+        contaBradescoDAO.atualizarSaldoApp(contaId, novoSaldoApp);
+        cofreDAO.deletarCofre(cofreId);
+
+        //atualiza na memória
         cliente.getConta().setSaldoApp(novoSaldoApp);
         cliente.getConta().getCofres().remove(cofreSelecionado);
 
         return OperationResult.sucesso("Cofrinho deletado com sucesso. \n Saldo retornado: " + saldoRetornado, 0, novoSaldoApp);
     }
-
 
 
 
@@ -63,19 +80,26 @@ public class CofreService {
         CofreBradesco novoCofreComSaldo = new CofreBradesco(contaId, novoNomeCofrinho, novoObjetivoCofrinho, valorDeposito);
         cofreDAO.criarCofreComSaldo(novoCofreComSaldo);
            conta.getCofres().add(novoCofreComSaldo);
-
         float novoSaldoApp = conta.getSaldoApp() - valorDeposito;
-        conta.setSaldoApp(novoSaldoApp);
 
+        //atualizando no banco e na memória.
+        contaBradescoDAO.atualizarSaldoApp(contaId, novoSaldoApp);
+        conta.setSaldoApp(novoSaldoApp);
 
         return OperationResult.sucesso("Seu cofrinho foi criado com sucesso!", valorDeposito, novoSaldoApp);
     }
+
+
+
+
+
 
     public OperationResult optionNo(Bradesco conta, int contaId, String novoNomeCofrinho, String novoObjetivoCofrinho) {
 
         CofreBradesco novoCofreSemSaldo = new CofreBradesco(contaId, novoNomeCofrinho, novoObjetivoCofrinho, 0);
 
         conta.getCofres().add(novoCofreSemSaldo);
+
         return OperationResult.sucesso("Seu cofrinho foi criado com sucesso!", 0, conta.getSaldoApp());
     }
 }

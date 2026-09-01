@@ -9,7 +9,7 @@ import banco.domain.Bradesco;
 import banco.domain.Cliente;
 
 
-public class ClienteDAO {
+public class                ClienteDAO {
 
     public Cliente autenticar(String email, int senha) {
 

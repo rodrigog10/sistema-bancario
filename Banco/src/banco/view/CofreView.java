@@ -17,13 +17,13 @@ public class CofreView {
     private final CofreService cofreService = new CofreService();
     private final CofreDAO cofreDAO = new CofreDAO();
 
-
     public void exibirMenuCofre(Cliente cliente) {
 
         Scanner input = new Scanner(System.in);
         Bradesco conta = cliente.getConta();
         int contaId = conta.getId(); // do Bradesco
         float saldoApp = conta.getSaldoApp();
+
 
 
         System.out.println("=== MENU COFRE === \n");
@@ -94,6 +94,7 @@ public class CofreView {
                     if (opcaoGerenciamento == 2) {
                         System.out.print("\nDigite o nome do novo objetivo: ");
                         String novoObjetivo = input.nextLine();
+
                         OperationResult resultadoObjetivo = cofreService.alterarObjetivo(cofreSelecionado, novoObjetivo);
 
                         System.out.println(resultadoObjetivo.getMensagem());
@@ -109,11 +110,13 @@ public class CofreView {
                         input.nextLine();
 
                         if (opcaoDeletar == 1) {
-                            OperationResult resultadoDelete = cofreService.deletarCofre(cliente, cofreSelecionado);
+                            int cofreId = cofreSelecionado.getId();
+                            OperationResult resultadoDelete = cofreService.deletarCofre(cofreSelecionado, cliente);
 
                             if (resultadoDelete.isSucesso()) {
                                 System.out.println("\n" + resultadoDelete.getMensagem());
-                                System.out.println("Saldo atual da conta: R$ " + resultadoDelete.getNovoSaldoApp());
+                                System.out.println("Pressione ENTER para voltar...");
+                                input.nextLine();
                             } else {
                                 System.out.println("\nErro ao excluir: " + resultadoDelete.getMensagem());
                             }

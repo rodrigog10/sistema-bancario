@@ -82,6 +82,11 @@ public class CofreDAO {
         }
     }
 
+
+
+
+
+
     public void atualizarObjetivoCofre(String novoObjetivo, int idCofre) {
         String sql = "UPDATE cofre_bradesco SET objetivo_cofre = ? WHERE id = ?";
 
@@ -95,6 +100,26 @@ public class CofreDAO {
                 System.out.println("Erro ao atualizar o nome do cofre: " + e.getMessage());
             }
     }
+
+
+
+
+
+
+    public void deletarCofre(int cofreId){
+
+            String sql = "DELETE FROM cofre_bradesco WHERE id = ?";
+                try(Connection connect = DataBaseConnection.getConnection();
+                    PreparedStatement ps = connect.prepareStatement(sql)) {
+
+                    ps.setInt(1, cofreId);
+                    ps.executeUpdate();
+
+                } catch (Exception e) {
+                    System.out.println("Erro ao deletar o cofre: " + e.getMessage());
+                }
+    }
+
 
 
 }
