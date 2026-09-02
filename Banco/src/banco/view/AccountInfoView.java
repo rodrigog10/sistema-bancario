@@ -1,15 +1,25 @@
 package banco.view;
 
+import banco.dao.CofreDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class AccountInfoView {
 
     public void exibirMenuInfo(Cliente cliente) {
+
+        CofreDAO cofreDAO =  new CofreDAO();
         Bradesco conta = cliente.getConta();
+        List<CofreBradesco> cofres = cofreDAO.buscarCofres(conta.getId());
+
+
+        CofreGestaoView cofreGestaoView =  new CofreGestaoView();
+
+
         Scanner input = new Scanner(System.in);
 
         try {
@@ -20,13 +30,10 @@ public class AccountInfoView {
 
             System.out.println("\n=== SEUS COFRINHOS ===");
 
-            if (conta.getCofres().isEmpty()) {
+            if (cofres.isEmpty()) {
                 System.out.println("Você não possui nenhum cofrinho cadastrado.");
             } else {
-                for (int i = 0; i < conta.getCofres().size(); i++) {
-                    CofreBradesco c = conta.getCofres().get(i);
-                    System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() +" | Objetivo: " + c.getObjetivoCofre() + " | Saldo: R$ " + c.getSaldoCofre());
-                }
+                cofreGestaoView.exibirMenuGestaoCofre(cofres);
             }
 
             System.out.println("\nPressione ENTER para voltar ao menu...");

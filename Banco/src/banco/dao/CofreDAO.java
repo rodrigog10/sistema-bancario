@@ -80,6 +80,22 @@ public class CofreDAO {
         return false;
     }
 
+    public void depositarCofre(int cofreId, float valorDeposito) {
+        String sql = "UPDATE cofre_bradesco SET saldo_cofre = ? WHERE id = ?";
+
+        try (Connection connect = DataBaseConnection.getConnection();
+             PreparedStatement ps = connect.prepareStatement(sql)) {
+
+            ps.setFloat(1, valorDeposito);
+            ps.setInt(2, cofreId);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Erro ao depositar no cofre: " + e.getMessage());
+        }
+
+    }
+
 
     public void atualizarNomeCofre(String novoNome, int idCofre) {
 
@@ -106,6 +122,7 @@ public class CofreDAO {
             ps.setString(1, novoObjetivo);
             ps.setInt(2, idCofre);
             ps.executeUpdate();
+
         } catch (Exception e) {
             System.out.println("Erro ao atualizar o nome do cofre: " + e.getMessage());
         }

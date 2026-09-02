@@ -34,6 +34,10 @@ public class Bradesco {
         this.saldoApp = saldoApp;
     }
 
+    public void setCofres(List<CofreBradesco> cofres) {
+        this.cofres = cofres;
+    }
+
     public List<CofreBradesco> getCofres() {
         return cofres;
     }

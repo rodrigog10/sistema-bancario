@@ -5,7 +5,7 @@ import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 import banco.services.OperationResult;
-import banco.services.cofreServices.WithdrawService;
+import banco.services.cofreServices.WithdrawCofreService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,13 +14,14 @@ public class WithdrawView {
     Bradesco conta = new Bradesco();
     private final CofreDAO cofreDAO = new CofreDAO();
     private final Scanner input = new Scanner(System.in);
-    private final WithdrawService withdrawService = new WithdrawService();
+    private final WithdrawCofreService withdrawService = new WithdrawCofreService();
 
-    public void exibirMenuSaque(Cliente cliente) {
+    public void exibirMenuSaque(Cliente cliente, CofreBradesco cofreSelecionado) {
+
         List<CofreBradesco> cofres = cofreDAO.buscarCofres(conta.getId());
         try {
-            System.out.println("=== ÁREA DE SAQUE ===");
-            Bradesco conta = cliente.getConta();
+            System.out.println("      ~ Área de saque      ");
+            Bradesco contaId = cliente.getConta();
 
             if (conta.getCofres().isEmpty()) {
                 System.out.println("\nVocê não tem cofrinhos disponíveis.");

@@ -5,7 +5,7 @@ import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 import banco.services.OperationResult;
-import banco.services.cofreServices.DepositService;
+import banco.services.cofreServices.DepositCofreService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -13,41 +13,38 @@ import java.util.Scanner;
 public class DepositView {
 
     private final Scanner input = new Scanner(System.in);
-    private final DepositService depositService = new DepositService();
+    private final DepositCofreService depositService = new DepositCofreService();
     private final CofreDAO cofreDAO = new CofreDAO();
 
-    public void exibirMenuDeposito(Cliente cliente) {
+    public void exibirMenuDeposito(Cliente cliente, CofreBradesco cofreSelecionado, int opcaoCofre) {
         try {
-            System.out.println("=== ÁREA DE DEPÓSITO ===");
+            System.out.println("     ~ Área de depósito      \n");
 
             Bradesco conta = cliente.getConta();
+            float saldoApp = cliente.getConta().getSaldoApp();
+
             List<CofreBradesco> cofres = cofreDAO.buscarCofres(conta.getId());
-            if (conta.getCofres().isEmpty()) {
+
+            if (cofres.isEmpty()) {
                 System.out.println("\nVocê não tem cofrinhos disponíveis.");
                 System.out.println("Pressione ENTER para voltar ao menu...");
                 input.nextLine();
                 return;
             }
 
-            System.out.println("Saldo disponível no App: R$ " + conta.getSaldoApp());
-            System.out.println("\n=== Seus cofrinhos disponíveis: ===");
+            System.out.println("Saldo disponível no App: R$ " + saldoApp+"\n");
 
-            CofreGestaoView.exibirMenuGestaoCofre(cofres);
-
-            System.out.print("\nSelecione o cofrinho: ");
-            int opcaoCofre = input.nextInt();
-
-            System.out.print("Digite o valor que deseja depositar: R$ ");
+            System.out.println("Digite o valor que deseja depositar: ");
+            System.out.print("> ");
             float valorDeposito = input.nextFloat();
             input.nextLine();
 
-            OperationResult resultado = depositService.depositar(cliente, opcaoCofre, valorDeposito);
+            OperationResult resultado = depositService.depositar(cliente, cofreSelecionado, opcaoCofre, valorDeposito);
 
             if (resultado.isSucesso()) {
-                System.out.println("\n" + resultado.getMensagem());
-                System.out.println("Valor do depósito efetuado: R$ " + valorDeposito);
+                System.out.println("\n" + resultado.getMensagem()+"\n");
+                System.out.println("Valor do depósito efetuado: R$ " + valorDeposito + "\n");
                 System.out.println("Novo saldo do cofrinho: R$ " + resultado.getNovoSaldoCofre());
-                System.out.println("Saldo atual do aplicativo: R$ " + resultado.getNovoSaldoApp());
                 System.out.println("\nPressione ENTER para voltar ao menu...");
                 input.nextLine();
             } else {

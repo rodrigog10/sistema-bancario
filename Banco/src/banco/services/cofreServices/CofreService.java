@@ -23,10 +23,6 @@ public class CofreService {
         return OperationResult.sucesso("Nome do cofrinho alterado com sucesso para: " + cofreSelecionado.getNomeCofre());
     }
 
-
-
-
-
     public OperationResult alterarObjetivo(CofreBradesco cofreSelecionado, String novoObjetivo) {
         if (novoObjetivo == null || novoObjetivo.trim().isEmpty()) {
             return OperationResult.erro("O seu cofrinho deve ter um objetivo.");
@@ -37,10 +33,6 @@ public class CofreService {
 
         return OperationResult.sucesso("Seu objetivo foi alterado com sucesso! \n Novo objetivo: " + cofreSelecionado.getObjetivoCofre());
     }
-
-
-
-
 
     public OperationResult deletarCofre(CofreBradesco cofreSelecionado, Cliente cliente) {
         if (cofreSelecionado == null || cofreSelecionado.getId() == 0) {
@@ -61,14 +53,11 @@ public class CofreService {
         cliente.getConta().setSaldoApp(novoSaldoApp);
         cliente.getConta().getCofres().remove(cofreSelecionado);
 
-        return OperationResult.sucesso("Cofrinho deletado com sucesso. \n Saldo retornado: " + saldoRetornado, 0, novoSaldoApp);
+        return OperationResult.sucesso("Cofrinho deletado com sucesso. \n Saldo retornado: R$ " + saldoRetornado, 0, novoSaldoApp);
     }
 
 
-
-
-
-    public OperationResult optionYes(Bradesco conta, int contaId, float saldoApp, String novoNomeCofrinho, String novoObjetivoCofrinho, float valorDeposito){
+    public OperationResult optionComSaldo(Bradesco conta, int contaId, float saldoApp, String novoNomeCofrinho, String novoObjetivoCofrinho, float valorDeposito){
 
         if (valorDeposito <= 0) {
             return OperationResult.erro("O valor do depósito deve ser maior que zero.");
@@ -86,15 +75,10 @@ public class CofreService {
         contaBradescoDAO.atualizarSaldoApp(contaId, novoSaldoApp);
         conta.setSaldoApp(novoSaldoApp);
 
-        return OperationResult.sucesso("Seu cofrinho foi criado com sucesso!", valorDeposito, novoSaldoApp);
+        return OperationResult.sucesso("Seu cofrinho foi criado com sucesso! \n", valorDeposito, novoSaldoApp);
     }
 
-
-
-
-
-
-    public OperationResult optionNo(Bradesco conta, int contaId, String novoNomeCofrinho, String novoObjetivoCofrinho) {
+    public OperationResult optionSemSaldo(Bradesco conta, int contaId, String novoNomeCofrinho, String novoObjetivoCofrinho) {
 
         CofreBradesco novoCofreSemSaldo = new CofreBradesco(contaId, novoNomeCofrinho, novoObjetivoCofrinho, 0);
 

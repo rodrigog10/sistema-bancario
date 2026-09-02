@@ -5,7 +5,7 @@ import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 import banco.services.OperationResult;
 
-public class WithdrawService {
+public class WithdrawCofreService {
 
     public OperationResult sacar(Cliente cliente, int opcaoCofre, float valorSaque) {
 
