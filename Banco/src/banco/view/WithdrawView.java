@@ -5,7 +5,7 @@ import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 import banco.services.OperationResult;
-import banco.services.WithdrawService;
+import banco.services.cofreServices.WithdrawService;
 
 import java.util.List;
 import java.util.Scanner;

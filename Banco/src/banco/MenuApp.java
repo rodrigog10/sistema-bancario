@@ -1,6 +1,7 @@
 package banco.view; // Ajuste o pacote para banco.view se estiver na pasta view
 
 import banco.domain.Cliente;
+
 import java.util.Scanner;
 
 public class MenuApp {

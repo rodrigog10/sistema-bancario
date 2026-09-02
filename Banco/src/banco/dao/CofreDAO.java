@@ -39,19 +39,16 @@ public class CofreDAO {
     }
 
 
-
-
-
-    public boolean criarCofreComSaldo(CofreBradesco novoCofre) {
+    public boolean criarCofreComSaldo(CofreBradesco novoCofreComSaldo) {
         String sql = "INSERT INTO cofre_bradesco (conta_id, nome_cofre, objetivo_cofre, saldo_cofre) VALUES (?, ?, ?, ?)";
 
         try (Connection connect = DataBaseConnection.getConnection();
              PreparedStatement ps = connect.prepareStatement(sql)) {
 
-            ps.setInt(1, novoCofre.getContaId());
-            ps.setString(2, novoCofre.getNomeCofre());
-            ps.setString(3, novoCofre.getObjetivoCofre());
-            ps.setFloat(4, novoCofre.getSaldoCofre());
+            ps.setInt(1, novoCofreComSaldo.getContaId());
+            ps.setString(2, novoCofreComSaldo.getNomeCofre());
+            ps.setString(3, novoCofreComSaldo.getObjetivoCofre());
+            ps.setFloat(4, novoCofreComSaldo.getSaldoCofre());
 
             ps.executeUpdate();
             return true;
@@ -63,7 +60,25 @@ public class CofreDAO {
     }
 
 
+    public boolean criarCofreSemSaldo(CofreBradesco novoCofreSemSaldo) {
+        String sql = "INSERT INTO cofre_bradesco (conta_id, nome_cofre, objetivo_cofre, saldo_cofre) values (?,?,?,?)";
 
+        try (Connection connect = DataBaseConnection.getConnection();
+             PreparedStatement ps = connect.prepareStatement(sql)) {
+
+            ps.setInt(1, novoCofreSemSaldo.getContaId());
+            ps.setString(2, novoCofreSemSaldo.getNomeCofre());
+            ps.setString(3, novoCofreSemSaldo.getObjetivoCofre());
+            ps.setFloat(4, novoCofreSemSaldo.getSaldoCofre());
+
+            ps.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao criar cofre: " + e.getMessage());
+        }
+        return false;
+    }
 
 
     public void atualizarNomeCofre(String novoNome, int idCofre) {
@@ -83,43 +98,33 @@ public class CofreDAO {
     }
 
 
-
-
-
-
     public void atualizarObjetivoCofre(String novoObjetivo, int idCofre) {
         String sql = "UPDATE cofre_bradesco SET objetivo_cofre = ? WHERE id = ?";
 
-            try(Connection connect = DataBaseConnection.getConnection();
-            PreparedStatement ps = connect.prepareStatement(sql))
-            {
-                ps.setString(1, novoObjetivo);
-                ps.setInt(2, idCofre);
-                ps.executeUpdate();
-            } catch (Exception e) {
-                System.out.println("Erro ao atualizar o nome do cofre: " + e.getMessage());
-            }
+        try (Connection connect = DataBaseConnection.getConnection();
+             PreparedStatement ps = connect.prepareStatement(sql)) {
+            ps.setString(1, novoObjetivo);
+            ps.setInt(2, idCofre);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar o nome do cofre: " + e.getMessage());
+        }
     }
 
 
+    public void deletarCofre(int cofreId) {
 
+        String sql = "DELETE FROM cofre_bradesco WHERE id = ?";
+        try (Connection connect = DataBaseConnection.getConnection();
+             PreparedStatement ps = connect.prepareStatement(sql)) {
 
+            ps.setInt(1, cofreId);
+            ps.executeUpdate();
 
-
-    public void deletarCofre(int cofreId){
-
-            String sql = "DELETE FROM cofre_bradesco WHERE id = ?";
-                try(Connection connect = DataBaseConnection.getConnection();
-                    PreparedStatement ps = connect.prepareStatement(sql)) {
-
-                    ps.setInt(1, cofreId);
-                    ps.executeUpdate();
-
-                } catch (Exception e) {
-                    System.out.println("Erro ao deletar o cofre: " + e.getMessage());
-                }
+        } catch (Exception e) {
+            System.out.println("Erro ao deletar o cofre: " + e.getMessage());
+        }
     }
-
 
 
 }

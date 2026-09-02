@@ -1,8 +1,9 @@
-package banco.services;
+package banco.services.cofreServices;
 
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
+import banco.services.OperationResult;
 
 public class DepositService {
 

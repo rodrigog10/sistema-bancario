@@ -1,13 +1,11 @@
 package banco.view;
 
-
 import banco.dao.CofreDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
-import banco.services.CofreService;
+import banco.services.cofreServices.CofreService;
 import banco.services.OperationResult;
-
 
 import java.util.List;
 import java.util.Scanner;
@@ -18,20 +16,17 @@ public class CofreView {
     private final CofreDAO cofreDAO = new CofreDAO();
 
     public void exibirMenuCofre(Cliente cliente) {
-
         Scanner input = new Scanner(System.in);
         Bradesco conta = cliente.getConta();
-        int contaId = conta.getId(); // do Bradesco
+        int contaId = conta.getId();
         float saldoApp = conta.getSaldoApp();
-
-
 
         System.out.println("=== MENU COFRE === \n");
         try {
             System.out.println("\nSelecione a opção que deseja utilizar: \n ");
-            System.out.println("1 - Visualizar Cofrinhos");
+            System.out.println("1 - Criar novo Cofrinho");
             System.out.println("2 - Gerenciar Cofrinhos (Editar/Excluir)");
-            System.out.println("3 - Criar novo Cofrinho");
+            System.out.println("3 - Visualizar Cofrinhos");
             System.out.println("0 - Voltar");
             System.out.print("> ");
 
@@ -40,20 +35,72 @@ public class CofreView {
             List<CofreBradesco> cofres = cofreDAO.buscarCofres(conta.getId());
 
             if (opcaoMenu == 1) {
-                if (cofres.isEmpty()) {
-                    System.out.println("\nVocê não tem cofrinhos registrados.");
-                    System.out.println("Pressione ENTER para voltar ao menu...");
-                    input.nextLine();
+                System.out.print("\nDigite o nome do seu novo cofrinho: \n");
+                String novoNomeCofrinho = input.nextLine();
+
+                if (novoNomeCofrinho == null || novoNomeCofrinho.trim().isEmpty()) {
+                    System.out.println("Erro: O nome do cofrinho não pode ser vazio!");
                     return;
+                }
+
+                System.out.print("Digite o objetivo do seu cofrinho: \n");
+                String novoObjetivoCofrinho = input.nextLine();
+
+                if (novoObjetivoCofrinho == null || novoObjetivoCofrinho.trim().isEmpty()) {
+                    System.out.println("Erro: O objetivo do cofrinho não pode ser vazio!");
+                    return;
+                }
+
+                System.out.println("\nDeseja inserir valor no cofrinho? \n");
+                System.out.println("\n1 - Sim");
+                System.out.println("2 - Não");
+                System.out.print("> ");
+
+                int opcaoInserir = input.nextInt();
+                input.nextLine();
+
+                if (opcaoInserir == 1) {
+                    System.out.print("\nDigite o valor a ser inserido: R$ ");
+                    float valorDeposito = input.nextFloat();
+                    input.nextLine();
+
+                    OperationResult resultado = cofreService.optionYes(conta, contaId, saldoApp, novoNomeCofrinho, novoObjetivoCofrinho, valorDeposito);
+
+                    if (resultado.isSucesso()) {
+                        System.out.println("\n" + resultado.getMensagem());
+                        System.out.println("Nome: " + novoNomeCofrinho + " | Objetivo: " + novoObjetivoCofrinho + " | Saldo: R$ " + valorDeposito);
+                    } else {
+                        System.out.println("\n" + resultado.getMensagem());
+                    }
+                    System.out.println("\nPressione ENTER para voltar...");
+                    input.nextLine();
+
                 } else {
-                    CofreGestaoView.exibirMenuGestaoCofre(cofres);
+                    OperationResult resultado = cofreService.optionNo(conta, contaId, novoNomeCofrinho, novoObjetivoCofrinho);
+
+                    if (resultado.isSucesso()) {
+                        System.out.println("\n" + resultado.getMensagem()+"\n");
+                        System.out.println("Nome: " + novoNomeCofrinho);
+                        System.out.println("Objetivo: " + novoObjetivoCofrinho);
+                    } else {
+                        System.out.println("\n" + resultado.getMensagem());
+                    }
                     System.out.println("\nPressione ENTER para voltar...");
                     input.nextLine();
                 }
             }
 
-            if (opcaoMenu == 2) {
+            if (opcaoMenu == 3) {
+                if (cofres.isEmpty()) {
+                    System.out.println("\nVocê não tem cofrinhos registrados.");
+                } else {
+                    CofreGestaoView.exibirMenuGestaoCofre(cofres);
+                }
+                System.out.println("\nPressione ENTER para voltar ao menu...");
+                input.nextLine();
+            }
 
+            if (opcaoMenu == 2) {
                 if (cofres.isEmpty()) {
                     System.out.println("\nVocê não tem cofrinhos registrados.");
                     System.out.println("Pressione ENTER para voltar ao menu...");
@@ -96,7 +143,6 @@ public class CofreView {
                         String novoObjetivo = input.nextLine();
 
                         OperationResult resultadoObjetivo = cofreService.alterarObjetivo(cofreSelecionado, novoObjetivo);
-
                         System.out.println(resultadoObjetivo.getMensagem());
                     }
 
@@ -110,84 +156,20 @@ public class CofreView {
                         input.nextLine();
 
                         if (opcaoDeletar == 1) {
-                            int cofreId = cofreSelecionado.getId();
                             OperationResult resultadoDelete = cofreService.deletarCofre(cofreSelecionado, cliente);
 
                             if (resultadoDelete.isSucesso()) {
                                 System.out.println("\n" + resultadoDelete.getMensagem());
-                                System.out.println("Pressione ENTER para voltar...");
-                                input.nextLine();
                             } else {
                                 System.out.println("\nErro ao excluir: " + resultadoDelete.getMensagem());
                             }
+                            System.out.println("Pressione ENTER para voltar...");
+                            input.nextLine();
                         }
                     }
 
                 } else {
                     System.out.println("\nOpção de cofrinho inválida!");
-                }
-            }
-
-            if (opcaoMenu == 3) {
-
-                System.out.print("\nDigite o nome do seu novo cofrinho: \n");
-                String novoNomeCofrinho = input.nextLine();
-
-                if (novoNomeCofrinho == null || novoNomeCofrinho.trim().isEmpty()) {
-                    System.out.println("Erro: O nome do cofrinho não pode ser vazio!");
-                    return;
-                }
-
-                System.out.print("Digite o objetivo do seu cofrinho: \n");
-                String novoObjetivoCofrinho = input.nextLine();
-
-                if (novoObjetivoCofrinho == null || novoObjetivoCofrinho.trim().isEmpty()) {
-                    System.out.println("Erro: O objetivo do cofrinho não pode ser vazio!");
-                    return;
-                }
-
-                System.out.println("\nDeseja inserir valor no cofrinho? \n");
-                System.out.println("\n1 - Sim");
-                System.out.println("2 - Não");
-                System.out.print("> ");
-
-                int opcaoInserir = input.nextInt();
-                input.nextLine();
-
-                if (opcaoInserir == 1) {
-                    System.out.print("\nDigite o valor a ser inserido: R$ ");
-                    float valorDeposito = input.nextFloat();
-                    input.nextLine();
-
-
-
-                    OperationResult resultado = cofreService.optionYes(conta, contaId, saldoApp, novoNomeCofrinho, novoObjetivoCofrinho, valorDeposito);
-
-                    if (resultado.isSucesso()) {
-                        System.out.println("\n" + resultado.getMensagem());
-                        System.out.println("Nome: " + novoNomeCofrinho + " | Objetivo: " + novoObjetivoCofrinho + " | Saldo: R$ " + valorDeposito);
-                        System.out.println("\nPressione ENTER para voltar...");
-                        input.nextLine();
-                    } else {
-                        System.out.println("\n" + resultado.getMensagem());
-                        System.out.println("Pressione ENTER para voltar...");
-                        input.nextLine();
-                    }
-
-                } else {
-                    OperationResult resultado = cofreService.optionNo(conta, contaId, novoNomeCofrinho, novoObjetivoCofrinho);
-
-                    if (resultado.isSucesso()) {
-                        System.out.println("\n" + resultado.getMensagem());
-                        System.out.println("Nome: " + novoNomeCofrinho);
-                        System.out.println("Objetivo: " + novoObjetivoCofrinho);
-                        System.out.println("\nPressione ENTER para voltar...");
-                        input.nextLine();
-                    } else {
-                        System.out.println("\n" + resultado.getMensagem());
-                        System.out.println("Pressione ENTER para voltar...");
-                        input.nextLine();
-                    }
                 }
             }
 
@@ -197,5 +179,4 @@ public class CofreView {
             input.nextLine();
         }
     }
-
 }

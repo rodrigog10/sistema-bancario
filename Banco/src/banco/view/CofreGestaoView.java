@@ -10,7 +10,7 @@ public class CofreGestaoView {
     public static void exibirMenuGestaoCofre(List<CofreBradesco> cofres) {
         for (int i = 0; i < cofres.size(); i++) {
             CofreBradesco c = cofres.get(i);
-            System.out.println((i + 1) + " - Nome: " + c.getNomeCofre() + "\n - Objetivo: " + c.getObjetivoCofre() +"\n - Saldo: R$ " + c.getSaldoCofre() + "\n");
+            System.out.println("\n   "+(i + 1)+" Cofrinho: \n"+ "\n - Nome: " + c.getNomeCofre() + "\n - Objetivo: " + c.getObjetivoCofre() +"\n - Saldo: R$ " + c.getSaldoCofre() + "\n");
         }
     }
 }

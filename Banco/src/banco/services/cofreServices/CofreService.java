@@ -1,11 +1,11 @@
-package banco.services;
+package banco.services.cofreServices;
 
 import banco.dao.CofreDAO;
 import banco.dao.ContaBradescoDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
-
+import banco.services.OperationResult;
 
 
 public class CofreService {
@@ -98,8 +98,9 @@ public class CofreService {
 
         CofreBradesco novoCofreSemSaldo = new CofreBradesco(contaId, novoNomeCofrinho, novoObjetivoCofrinho, 0);
 
+        cofreDAO.criarCofreSemSaldo(novoCofreSemSaldo);
         conta.getCofres().add(novoCofreSemSaldo);
 
-        return OperationResult.sucesso("Seu cofrinho foi criado com sucesso!", 0, conta.getSaldoApp());
+        return OperationResult.sucesso("Seu cofrinho foi criado com sucesso!", 0, 0);
     }
 }
