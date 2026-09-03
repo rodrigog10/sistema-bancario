@@ -1,35 +1,47 @@
 package banco.services.cofreServices;
 
+import banco.dao.CofreDAO;
+import banco.dao.ContaBradescoDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 import banco.services.OperationResult;
 
+import java.util.List;
+
 public class WithdrawCofreService {
 
-    public OperationResult sacar(Cliente cliente, int opcaoCofre, float valorSaque) {
+    public OperationResult sacar(Cliente cliente, CofreBradesco cofreSelecionado, int opcaoCofre, float valorSaque) {
+
+        CofreDAO cofreDAO =  new CofreDAO();
+        ContaBradescoDAO contaBradescoDAO = new ContaBradescoDAO();
+        int contaId = cliente.getConta().getId();
+        int cofreId = cofreSelecionado.getId();
+        List<CofreBradesco> cofres = cofreDAO.buscarCofres(cliente.getConta().getId());
+        Bradesco conta = cliente.getConta();
+        float saldoApp = conta.getSaldoApp();
 
         if (valorSaque <= 0) {
             return OperationResult.erro("O valor do saque deve ser maior que zero.");
         }
 
-        Bradesco conta = cliente.getConta();
-
-        if (conta.getCofres().isEmpty()) {
+        if (cofres.isEmpty()) {
             return OperationResult.erro("Você não possui cofrinhos registrados.");
         }
 
-        int indice = opcaoCofre - 1;
+        int indice =  - 1;
 
         if (indice < 0 || indice >= conta.getCofres().size()) {
             return OperationResult.erro("Opção de cofre inválida.");
         }
 
-        CofreBradesco cofreSelecionado = conta.getCofres().get(indice);
-
         if (cofreSelecionado.getSaldoCofre() < valorSaque) {
             return OperationResult.erro("Saldo insuficiente dentro do cofre.");
         }
+
+        cofreDAO.sacarCofre(cofreId, valorSaque);
+        contaBradescoDAO.atualizarSaldoApp(contaId, saldoApp);
+
 
         float novoSaldoCofre = cofreSelecionado.getSaldoCofre() - valorSaque;
         float novoSaldoApp = conta.getSaldoApp() + valorSaque;

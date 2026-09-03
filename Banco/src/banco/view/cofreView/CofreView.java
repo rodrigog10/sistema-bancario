@@ -1,4 +1,4 @@
-package banco.view;
+package banco.view.cofreView;
 
 import banco.dao.CofreDAO;
 import banco.domain.Bradesco;
@@ -6,13 +6,14 @@ import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 import banco.services.cofreServices.CofreService;
 import banco.services.OperationResult;
+import banco.view.CofreGestaoView;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class CofreView {
-    private final DepositView depositView = new DepositView();
-    private final WithdrawView withdrawView = new WithdrawView();
+    private final DepositCofreView depositView = new DepositCofreView();
+    private final WithdrawCofreView withdrawView = new WithdrawCofreView();
     private final CofreService cofreService = new CofreService();
     private final CofreDAO cofreDAO = new CofreDAO();
 
@@ -129,7 +130,7 @@ public class CofreView {
                         depositView.exibirMenuDeposito(cliente, cofreSelecionado, opcaoCofre);
                     }
                     if (opcaoGerenciamento == 2) {
-                        withdrawView.exibirMenuSaque(cliente, cofreSelecionado);
+                        withdrawView.exibirMenuSaque(cliente, cofreSelecionado, opcaoCofre);
                     }
                     if (opcaoGerenciamento == 3) {
                         System.out.println("1 - Alterar Nome");

@@ -1,10 +1,8 @@
 package banco.view; // Ajuste o pacote para banco.view se estiver na pasta view
 
 import banco.domain.Cliente;
-import banco.domain.CofreBradesco;
+import banco.view.cofreView.CofreView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class MenuApp {

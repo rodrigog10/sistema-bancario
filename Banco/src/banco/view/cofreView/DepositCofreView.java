@@ -1,4 +1,4 @@
-package banco.view;
+package banco.view.cofreView;
 
 import banco.dao.CofreDAO;
 import banco.domain.Bradesco;
@@ -10,7 +10,7 @@ import banco.services.cofreServices.DepositCofreService;
 import java.util.List;
 import java.util.Scanner;
 
-public class DepositView {
+public class DepositCofreView {
 
     private final Scanner input = new Scanner(System.in);
     private final DepositCofreService depositService = new DepositCofreService();
@@ -22,7 +22,6 @@ public class DepositView {
 
             Bradesco conta = cliente.getConta();
             float saldoApp = cliente.getConta().getSaldoApp();
-
             List<CofreBradesco> cofres = cofreDAO.buscarCofres(conta.getId());
 
             if (cofres.isEmpty()) {

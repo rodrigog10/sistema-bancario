@@ -7,12 +7,14 @@ import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
 import banco.services.OperationResult;
 
-public class DepositCofreService {
+import java.util.List;
+
+public class  DepositCofreService {
 
     public OperationResult depositar(Cliente cliente, CofreBradesco cofreSelecionado, int opcaoCofre, float valorDeposito) {
         CofreDAO cofreDAO =  new CofreDAO();
         ContaBradescoDAO contaBradescoDAO = new ContaBradescoDAO();
-
+        List<CofreBradesco> cofres = cofreDAO.buscarCofres(cliente.getConta().getId());
         int contaId = cliente.getConta().getId();
         int cofreId = cofreSelecionado.getId();
 
@@ -22,7 +24,7 @@ public class DepositCofreService {
         if (valorDeposito <= 0) {
             return OperationResult.erro("O valor do depósito deve ser maior que zero.");
         }
-        if (cofreSelecionado == null || cofreSelecionado.getId() == 0) {
+        if (cofres.isEmpty()) {
             return OperationResult.erro("Você não tem cofrinhos registrados.");
         }
 
