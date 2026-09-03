@@ -9,10 +9,10 @@ Aplicação console (CLI) desenvolvida em Java puro para simular operações ban
 * **Java 23**
 * **Arquitetura em Camadas** (`View`, `Service`, `DAO`)
 * **Banco de Dados Relacional** (PostgreSQL)
-* **Persistência de Dados** (JDBC com `PreparedStatement`)
+* **Persistência de Dados** (JDBC)
 * **Hidratação de Objetos em Memória** (Sincronização de estado entre banco e aplicação após login)
 * **Collections Framework** (`List`, `ArrayList`)
-* **POO Avançada** (Encapsulamento, Modifiers, Composição)
+* **POO** (Encapsulamento, Modifiers, Composição)
 * **Tratamento de Exceções** (`try-catch` resiliente para operações SQL e CLI)
 
 ---
