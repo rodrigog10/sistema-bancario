@@ -21,6 +21,7 @@ public class WithdrawCofreService {
         Bradesco conta = cliente.getConta();
         float saldoApp = conta.getSaldoApp();
 
+
         if (valorSaque <= 0) {
             return OperationResult.erro("O valor do saque deve ser maior que zero.");
         }
@@ -29,8 +30,7 @@ public class WithdrawCofreService {
             return OperationResult.erro("Você não possui cofrinhos registrados.");
         }
 
-        int indice =  - 1;
-
+        int indice = opcaoCofre - 1;
         if (indice < 0 || indice >= conta.getCofres().size()) {
             return OperationResult.erro("Opção de cofre inválida.");
         }
@@ -39,12 +39,16 @@ public class WithdrawCofreService {
             return OperationResult.erro("Saldo insuficiente dentro do cofre.");
         }
 
-        cofreDAO.sacarCofre(cofreId, valorSaque);
-        contaBradescoDAO.atualizarSaldoApp(contaId, saldoApp);
+        float saldoCofre = cofreSelecionado.getSaldoCofre();
 
 
-        float novoSaldoCofre = cofreSelecionado.getSaldoCofre() - valorSaque;
-        float novoSaldoApp = conta.getSaldoApp() + valorSaque;
+        float novoSaldoApp = saldoApp + valorSaque;
+        float novoSaldoCofre = saldoCofre - valorSaque;
+
+
+        cofreDAO.sacarCofre(cofreId, novoSaldoCofre);
+        contaBradescoDAO.atualizarSaldoApp(contaId, novoSaldoApp);
+
 
         cofreSelecionado.setSaldoCofre(novoSaldoCofre);
         conta.setSaldoApp(novoSaldoApp);

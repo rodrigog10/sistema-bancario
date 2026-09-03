@@ -18,6 +18,7 @@ public class  DepositCofreService {
         int contaId = cliente.getConta().getId();
         int cofreId = cofreSelecionado.getId();
 
+
         Bradesco conta = cliente.getConta();
         float saldoApp = conta.getSaldoApp();
 
@@ -39,19 +40,17 @@ public class  DepositCofreService {
             return OperationResult.erro("Saldo insuficiente!");
         }
 
+
+
         float novoSaldoApp = saldoApp - valorDeposito;
         float novoSaldoCofre = cofreSelecionado.getSaldoCofre() + valorDeposito;
 
-        //  Atualização no banco de dados:
+
             cofreDAO.depositarCofre(cofreId, novoSaldoCofre);
             contaBradescoDAO.atualizarSaldoApp(contaId, novoSaldoApp);
-        //--------------------------------------
 
 
-        //  atualiza o saldo do aplicativo na memória
             conta.setSaldoApp(novoSaldoApp);
-
-        // atualiza o saldo do cofre na memória
             cofreSelecionado.setSaldoCofre(novoSaldoCofre);
 
 

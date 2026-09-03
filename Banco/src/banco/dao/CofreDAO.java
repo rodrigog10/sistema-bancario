@@ -81,7 +81,7 @@ public class CofreDAO {
     }
 
     public void depositarCofre(int cofreId, float valorDeposito) {
-        String sql = "UPDATE cofre_bradesco SET saldo_app = ? WHERE id = ?";
+        String sql = "UPDATE cofre_bradesco SET saldo_cofre = ? WHERE id = ?";
 
         try (Connection connect = DataBaseConnection.getConnection();
              PreparedStatement ps = connect.prepareStatement(sql)) {
@@ -97,13 +97,13 @@ public class CofreDAO {
     }
 
 
-    public void sacarCofre(int cofreId, float valorSaque) {
-        String sql = "UPDATE conta_bradesco SET saldo_conta  = ? WHERE id = ?";
+    public void sacarCofre(int cofreId, float novoSaldoCofre) {
+        String sql = "UPDATE cofre_bradesco SET saldo_cofre  = ? WHERE id = ?";
 
         try (Connection connect = DataBaseConnection.getConnection();
         PreparedStatement ps = connect.prepareStatement(sql)) {
 
-            ps.setFloat(1, valorSaque);
+            ps.setFloat(1, novoSaldoCofre);
             ps.setInt(2, cofreId);
             ps.executeUpdate();
 
@@ -111,7 +111,6 @@ public class CofreDAO {
             System.out.println("Erro ao sacar no cofre: " + e.getMessage());
         }
     }
-
 
     public void atualizarNomeCofre(String novoNome, int idCofre) {
 

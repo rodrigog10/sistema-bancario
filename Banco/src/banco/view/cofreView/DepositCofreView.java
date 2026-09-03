@@ -18,7 +18,7 @@ public class DepositCofreView {
 
     public void exibirMenuDeposito(Cliente cliente, CofreBradesco cofreSelecionado, int opcaoCofre) {
         try {
-            System.out.println("     ~ Área de depósito      \n");
+            System.out.println("     Área de depósito\n");
 
             Bradesco conta = cliente.getConta();
             float saldoApp = cliente.getConta().getSaldoApp();

@@ -18,11 +18,12 @@ public class WithdrawCofreView {
 
     public void exibirMenuSaque(Cliente cliente, CofreBradesco cofreSelecionado, int opcaoCofre) {
         Bradesco conta = cliente.getConta();
-        float saldoApp = cliente.getConta().getSaldoApp();
+        float saldoCofre = cofreSelecionado.getSaldoCofre();
+
         List<CofreBradesco> cofres = cofreDAO.buscarCofres(conta.getId());
 
         try {
-            System.out.println("      ~ Área de saque      ");
+            System.out.println("     Área de saque\n");
             if (cofres.isEmpty()) {
                 System.out.println("\nVocê não tem cofrinhos disponíveis.");
                 System.out.println("Pressione ENTER para voltar ao menu...");
@@ -30,7 +31,7 @@ public class WithdrawCofreView {
                 return;
             }
 
-            System.out.println("Saldo disponível no App: R$ " + conta.getSaldoApp());
+            System.out.println("Saldo disponível no cofrinho: R$ " + saldoCofre);
 
             System.out.print("Digite o valor que deseja sacar: R$ ");
             float valorSaque = input.nextFloat();
@@ -39,10 +40,10 @@ public class WithdrawCofreView {
             OperationResult resultado = withdrawService.sacar(cliente, cofreSelecionado, opcaoCofre, valorSaque);
 
             if (resultado.isSucesso()) {
-                System.out.println("\n" + resultado.getMensagem());
-                System.out.println("Valor do saque efetuado: R$ " + valorSaque);
+            System.out.println("\n" + resultado.getMensagem() + "\n");
+                System.out.println("Valor do saque efetuado: R$ " + valorSaque + "\n");
                 System.out.println("Novo saldo do cofrinho: R$ " + resultado.getNovoSaldoCofre());
-                System.out.println("Saldo atual do aplicativo: R$ " + resultado.getNovoSaldoApp());
+
                 System.out.println("\nPressione ENTER para voltar ao menu...");
                 input.nextLine();
             } else {
