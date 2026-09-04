@@ -5,7 +5,7 @@ import banco.dao.ContaBradescoDAO;
 import banco.domain.Bradesco;
 import banco.domain.Cliente;
 import banco.domain.CofreBradesco;
-import banco.services.OperationResult;
+import banco.operations.OperationResult;
 
 import java.util.List;
 

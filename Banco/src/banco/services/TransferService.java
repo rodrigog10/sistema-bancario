@@ -1,8 +1,8 @@
 package banco.services;
 
-import banco.dao.ClienteDAO;
 import banco.dao.ContaBradescoDAO;
 import banco.domain.Cliente;
+import banco.operations.OperationResult;
 
 import java.util.List;
 
@@ -11,25 +11,43 @@ public class TransferService {
 
 
 
-    public Cliente buscarDestinatarioDAO(String contaEscolhida, Cliente remetente){
-        ContaBradescoDAO contaBradescoDao = new ContaBradescoDAO();
-
-        if (contaEscolhida == null || contaEscolhida.trim().isEmpty()){
-
+    public OperationResult buscarDestinatarioDAO (String contaEscolhida, Cliente remetente){
+        
+        
+        //aqui, inicialmente devo verificar se o remetente não está enviando para sí mesmo
+        
+        if (contaEscolhida.equals(remetente.getEmail())) {
+            return OperationResult.erro("Você não pode enviar dinheiro para sí mesmo.");
         }
+        
+        
+        ContaBradescoDAO contaBradescoDAO = new ContaBradescoDAO();
+        Cliente contaDestinatario = contaBradescoDAO.buscarDestinatario(contaEscolhida);
 
-        int idContaDestinatario = contaBradescoDao.buscarDestinatario(contaEscolhida);
+            if (contaDestinatario != null) {
+                return OperationResult.sucesso("Usuário encontrado: " + contaDestinatario.getNome(), contaDestinatario);
+            }
 
-        if (idContaDestinatario == -1) {
-
-        }
-
-
-        return remetente;
+            return OperationResult.erro("Usuário não encontrado.");
     }
 
-    // public void transferencia();
+    public OperationResult realizarTransferencia(Cliente remetente, Cliente destinatario, float valor) {
+        if (valor <= 0) {
+            return OperationResult.erro("O valor da transferência deve ser maior que zero.");
+        }
 
+        if (valor > remetente.getConta().getSaldoApp()) {
+            return OperationResult.erro("Saldo insuficiente no aplicativo.");
+        }
+
+        float novoSaldoRemetente = remetente.getConta().getSaldoApp() - valor;
+        float novoSaldoDestinatario = destinatario.getConta().getSaldoApp() + valor;
+
+        remetente.getConta().setSaldoApp(novoSaldoRemetente);
+        destinatario.getConta().setSaldoApp(novoSaldoDestinatario);
+
+        return OperationResult.sucesso("Transferência concluída com sucesso!", 0, novoSaldoRemetente);
+    }
 
 
 
@@ -58,21 +76,5 @@ public class TransferService {
         return null;
     }
 
-    public OperationResult realizarTransferencia(Cliente remetente, Cliente destinatario, float valor) {
-        if (valor <= 0) {
-            return OperationResult.erro("O valor da transferência deve ser maior que zero.");
-        }
 
-        if (valor > remetente.getConta().getSaldoApp()) {
-            return OperationResult.erro("Saldo insuficiente no aplicativo.");
-        }
-
-        float novoSaldoRemetente = remetente.getConta().getSaldoApp() - valor;
-        float novoSaldoDestinatario = destinatario.getConta().getSaldoApp() + valor;
-
-        remetente.getConta().setSaldoApp(novoSaldoRemetente);
-        destinatario.getConta().setSaldoApp(novoSaldoDestinatario);
-
-        return OperationResult.sucesso("Transferência concluída com sucesso!", 0, novoSaldoRemetente);
-    }
 }
